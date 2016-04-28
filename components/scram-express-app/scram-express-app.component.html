@@ -2,14 +2,14 @@
 
 <dom-module id="scram-http-server">
     <template>
-        <div>HTTP server running on port [[port]]</div>
+        <div>Express app listening on port [[port]]</div>
     </template>
 
     <script>
         class ScramHttpServerComponent {
 
             beforeRegister() {
-                this.is = 'scram-http-server';
+                this.is = 'scram-express-app';
                 this.properties = {
                     port: {
                         type: Number
