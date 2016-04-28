@@ -5,8 +5,11 @@
 
 <dom-module id="app-component">
     <template>
-        <scram-express-app port="5000">
+        <scram-express-app port="8000">
             <scram-express-route method="get" path="/" callback="[[indexController]]"></scram-express-route>
+            <scram-express-route method="get" path="/1" callback="[[indexController]]"></scram-express-route>
+            <scram-express-route method="get" path="/2" callback="[[indexController]]"></scram-express-route>
+            <scram-express-route method="get" path="/3" callback="[[indexController]]"></scram-express-route>
         </scram-express-app>
     </template>
 
