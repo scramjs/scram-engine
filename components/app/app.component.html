@@ -9,7 +9,7 @@
             <scram-express-route method="get" path="/" callback="[[indexController]]"></scram-express-route>
             <scram-express-route method="get" path="/1" callback="[[indexController]]"></scram-express-route>
             <scram-express-route method="get" path="/2" callback="[[indexController]]"></scram-express-route>
-            <scram-express-route method="get" path="/3" callback="[[indexController]]"></scram-express-route>
+            <scram-express-route method="get" path="/3" callbacks="[[callbacks]]"></scram-express-route>
         </scram-express-app>
     </template>
 
@@ -26,6 +26,17 @@
                 this.indexController = (req, res) => {
                     res.send('I think it is working, my friend');
                 };
+
+                this.callbacks = [
+                    (req, res, next) => {
+                        console.log('callback 1');
+                        next();
+                    },
+                    (req, res) => {
+                        console.log('callback 2');
+                        res.send('Finished');
+                    }
+                ];
             }
 
             attached() {}

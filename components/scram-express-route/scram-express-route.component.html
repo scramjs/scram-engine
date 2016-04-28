@@ -22,7 +22,11 @@
                     },
                     callback: {
                         type: Object,
-                        observer: 'initRoute'
+                        observer: 'initRouteWithCallback'
+                    },
+                    callbacks: {
+                        type: Array,
+                        observer: 'initRouteWithCallbacks'
                     }
                 };
             }
@@ -32,8 +36,12 @@
             detached() {}
             attributeChanged() {}
 
-            initRoute() {
+            initRouteWithCallback() {
                 window.expressApp[this.method.toLowerCase()](this.path, this.callback);
+            }
+
+            initRouteWithCallbacks() {
+                window.expressApp[this.method.toLowerCase()](this.path, ...this.callbacks);
             }
         }
 
