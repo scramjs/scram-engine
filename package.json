@@ -1,0 +1,33 @@
+{
+  "name": "scram-engine",
+  "version": "0.0.0",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lastmjs/scram-engine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lastmjs/scram-engine/issues"
+  },
+  "homepage": "https://github.com/lastmjs/scram-engine#readme",
+  "devDependencies": {
+    "babel-core": "6.7.0",
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015": "6.6.0",
+    "babel-preset-stage-3": "6.5.0",
+    "electron-prebuilt": "^0.37.7",
+    "electron-rebuild": "^1.1.3",
+    "ts-loader": "0.8.1",
+    "typescript": "1.8.7",
+    "webpack": "1.12.14"
+  },
+  "scripts": {
+    "webpack": "webpack --watch --progress --profile --colors --display-error-details --display-cached",
+    "single-page-server": "single-page-server -b=www -f=www/index.html",
+    "http-server": "http-server",
+    "start": "npm run webpack"
+  },
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

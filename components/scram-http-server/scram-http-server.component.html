@@ -1,0 +1,41 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="scram-http-server">
+    <template>
+        <div>HTTP server running on port [[port]]</div>
+    </template>
+
+    <script>
+        class ScramHttpServerComponent {
+
+            beforeRegister() {
+                this.is = 'scram-http-server';
+                this.properties = {
+                    port: {
+                        type: Number
+                    }
+                };
+            }
+
+            ready() {
+                const express = require('express');
+                const app = express();
+                const port = this.port;
+
+                app.get('/', (req, res) => {
+                    res.send('It works!');
+                });
+
+                app.listen(port, () => {
+                    console.log(`app listening on port: ${port}`);
+                });
+            }
+
+            attached() {}
+            detached() {}
+            attributeChanged() {}
+        }
+
+        Polymer(ScramHttpServerComponent);
+    </script>
+</dom-module>
