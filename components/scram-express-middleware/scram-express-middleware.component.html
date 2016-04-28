@@ -1,15 +1,15 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<dom-module id="scram-express-route">
+<dom-module id="scram-express-middleware">
     <template>
         <div>Route hooked up for: [[method]], [[path]]</div>
     </template>
 
     <script>
-        class ScramExpressRouteComponent {
+        class ScramExpressMiddlewareComponent {
 
             beforeRegister() {
-                this.is = 'scram-express-route';
+                this.is = 'scram-express-middleware';
                 this.properties = {
                     expressApp: {
                         type: Object
@@ -37,14 +37,34 @@
             attributeChanged() {}
 
             initRouteWithCallback() {
-                window.expressApp[this.method.toLowerCase()](this.path, this.callback);
+                if (this.method) {
+                    window.expressApp[this.method.toLowerCase()](this.path, this.callback);
+                    return;
+                }
+
+                if (this.path) {
+                    window.expressApp.use(this.path, this.callback);
+                    return;
+                }
+
+                window.expressApp.use(this.callback);
             }
 
             initRouteWithCallbacks() {
-                window.expressApp[this.method.toLowerCase()](this.path, ...this.callbacks);
+                if (this.method) {
+                    window.expressApp[this.method.toLowerCase()](this.path, ...this.callbacks);
+                    return;
+                }
+
+                if (this.path) {
+                    window.expressApp.use(this.path, ...this.callbacks);
+                    return;
+                }
+
+                window.expressApp.use(...this.callback);
             }
         }
 
-        Polymer(ScramExpressRouteComponent);
+        Polymer(ScramExpressMiddlewareComponent);
     </script>
 </dom-module>

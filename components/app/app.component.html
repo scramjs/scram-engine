@@ -1,15 +1,16 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../scram-express-app/scram-express-app.component.html">
-<link rel="import" href="../scram-express-route/scram-express-route.component.html">
+<link rel="import" href="../scram-express-middleware/scram-express-middleware.component.html">
 
 <dom-module id="app-component">
     <template>
         <scram-express-app port="8000">
-            <scram-express-route method="get" path="/" callback="[[indexController]]"></scram-express-route>
-            <scram-express-route method="get" path="/1" callback="[[indexController]]"></scram-express-route>
-            <scram-express-route method="get" path="/2" callback="[[indexController]]"></scram-express-route>
-            <scram-express-route method="get" path="/3" callbacks="[[callbacks]]"></scram-express-route>
+            <scram-express-middleware method="get" path="/" callback="[[indexController]]"></scram-express-middleware>
+            <scram-express-middleware method="get" path="/1" callback="[[indexController]]"></scram-express-middleware>
+            <scram-express-middleware method="get" path="/2" callback="[[indexController]]"></scram-express-middleware>
+            <scram-express-middleware method="get" path="/3" callbacks="[[callbacks]]"></scram-express-middleware>
+            <scram-express-middleware callback="[[errorHandler]]"></scram-express-middleware>
         </scram-express-app>
     </template>
 
@@ -37,6 +38,11 @@
                         res.send('Finished');
                     }
                 ];
+
+                this.errorHandler = (req, res) => {
+                    res.status(404);
+                    res.send('Not found my friend!');
+                };
             }
 
             attached() {}
