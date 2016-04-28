@@ -1,0 +1,42 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="scram-express-route">
+    <template>
+        <div>Route hooked up for: [[method]], [[path]]</div>
+    </template>
+
+    <script>
+        class ScramExpressRouteComponent {
+
+            beforeRegister() {
+                this.is = 'scram-express-route';
+                this.properties = {
+                    expressApp: {
+                        type: Object
+                    },
+                    method: {
+                        type: String
+                    },
+                    path: {
+                        type: String
+                    },
+                    callback: {
+                        type: Object,
+                        observer: 'initRoute'
+                    }
+                };
+            }
+
+            ready() {}
+            attached() {}
+            detached() {}
+            attributeChanged() {}
+
+            initRoute() {
+                window.expressApp[this.method.toLowerCase()](this.path, this.callback);
+            }
+        }
+
+        Polymer(ScramExpressRouteComponent);
+    </script>
+</dom-module>

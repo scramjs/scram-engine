@@ -1,0 +1,35 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../scram-express-app/scram-express-app.component.html">
+<link rel="import" href="../scram-express-route/scram-express-route.component.html">
+
+<dom-module id="app-component">
+    <template>
+        <scram-express-app port="5000">
+            <scram-express-route method="get" path="/" callback="[[indexController]]"></scram-express-route>
+        </scram-express-app>
+    </template>
+
+    <script>
+        class AppComponent {
+
+            beforeRegister() {
+                this.is = 'app-component';
+                this.properties = {
+                };
+            }
+
+            ready() {
+                this.indexController = (req, res) => {
+                    res.send('I think it is working, my friend');
+                };
+            }
+
+            attached() {}
+            detached() {}
+            attributeChanged() {}
+        }
+
+        Polymer(AppComponent);
+    </script>
+</dom-module>

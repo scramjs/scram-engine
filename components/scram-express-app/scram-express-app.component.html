@@ -22,13 +22,12 @@
                 const app = express();
                 const port = this.port;
 
-                app.get('/', (req, res) => {
-                    res.send('It works!');
-                });
-
                 app.listen(port, () => {
                     console.log(`app listening on port: ${port}`);
                 });
+
+                //TODO bad, but I don't know how to share object references with child elements yet
+                window.expressApp = app;
             }
 
             attached() {}
