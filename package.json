@@ -2,7 +2,7 @@
   "name": "scram-engine",
   "version": "0.0.0",
   "bin": {
-      "scram-engine": "./cli.js"
+    "scram-engine": "./cli.js"
   },
   "repository": {
     "type": "git",
@@ -16,8 +16,7 @@
     "@polymer/polymer": "^1.2.5-npm-test.2",
     "electron-rebuild": "^1.1.3",
     "express": "^4.13.4",
-    "scram-express-app": "git+ssh://git@github.com/scramjs/scram-express-app.git",
-    "scram-express-middleware": "git+ssh://git@github.com/scramjs/scram-express-middleware.git"
+    "scram-express": "git+ssh://git@github.com/scramjs/scram-express.git"
   },
   "dependencies": {
     "electron-prebuilt": "^0.37.7",
