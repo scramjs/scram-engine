@@ -24,6 +24,6 @@
     "electron-spawn": "git+ssh://git@github.com/scramjs/electron-spawn.git"
   },
   "scripts": {
-    "start": "electron-spawn main.js index.html"
+    "start": "electron-spawn main.js ../../index.html"
   }
 }
