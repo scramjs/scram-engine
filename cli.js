@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var exec = require('child_process').exec;
-var cmd = 'node_modules/scram-engine/node_modules/.bin/electron-spawn main.js index.html';
+var cmd = 'cd node_modules/scram-engine && npm start';
 
 var newProcess = exec(cmd);
 
