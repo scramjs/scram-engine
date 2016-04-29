@@ -11,11 +11,17 @@
   },
   "homepage": "https://github.com/lastmjs/scram-engine#readme",
   "devDependencies": {
-    "electron-prebuilt": "^0.37.7",
-    "electron-rebuild": "^1.1.3"
+    "@polymer/polymer": "^1.2.5-npm-test.2",
+    "electron-rebuild": "^1.1.3",
+    "express": "^4.13.4",
+    "scram-express-app": "git+ssh://git@github.com/scramjs/scram-express-app.git",
+    "scram-express-middleware": "git+ssh://git@github.com/scramjs/scram-express-middleware.git"
   },
   "dependencies": {
-    "@polymer/polymer": "^1.2.5-npm-test.2",
-    "express": "^4.13.4"
+    "electron-prebuilt": "^0.37.7",
+    "electron-spawn": "git+ssh://git@github.com/scramjs/electron-spawn.git"
+  },
+  "scripts": {
+    "start": "electron-spawn main.js index.html"
   }
 }

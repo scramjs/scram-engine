@@ -3,11 +3,17 @@
 <html>
 
     <head>
-        <link rel="import" href="components/app/app.component.html">
+        <link rel="import" href="app.component.html">
     </head>
 
     <body>
         <app-component>Loading...</app-component>
+
+        <script src="node_modules/electron-spawn/spawn-init.js"></script>
+
+        <script>
+            console.log('The app has been loaded');
+        </script>
     </body>
 
 </html>
