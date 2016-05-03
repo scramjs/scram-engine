@@ -18,7 +18,7 @@
   },
   "dependencies": {},
   "license": "MIT",
-  "keywords": "web-components",
+  "keywords": ["web-components"],
   "scripts": {
     "start": "electron main.js example/index.html"
   }
