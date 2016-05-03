@@ -1,5 +1,5 @@
 # What is this?
-ScramJS offers a simple way to use web components to write server-side code. If you have not heard of web components, then please [start learning today](http://webcomponents.org/). Web components offer a way to modularize and package functionality into reusable components that can be easily shared and composed to create entire applications. Currently they have been used mostly for front-end web development. Well, what about the back-end? Web components are not only useful for visual components, as the [Google Polymer project](https://www.polymer-project.org/1.0/) has shown us. Now you can build APIs and other server-side applications, leveraging the same declarativeness of the front-end world. 
+Scram.js offers a simple way to use web components to write server-side code. If you have not heard of web components, then please [start learning today](http://webcomponents.org/). Web components offer a way to modularize and package functionality into reusable components that can be easily shared and composed to create entire applications. Currently they have been used mostly for front-end web development. Well, what about the back-end? Web components are not only useful for visual components, as the [Google Polymer project](https://www.polymer-project.org/1.0/) has shown us. Now you can build APIs and other server-side applications, leveraging the same declarativeness of the front-end world. 
 
 ## Server-side Web Components
 This repo only offers access to the runtime necessary to use server-side web components. To actually begin building applications, you'll need components to work with:
@@ -7,12 +7,12 @@ This repo only offers access to the runtime necessary to use server-side web com
 * Express Web Components: https://github.com/scramjs/express-web-components
 
 ## Examples
-Here are some example Express apps that have been or are in the process of being rewritten with web components:
+Here are some example Express.js apps that have been or are in the process of being rewritten with web components:
 * https://github.com/scramjs/rest-api-express
 * https://github.com/scramjs/node-api
 
 ## Development Installation
-ScramJS leverages Electron to provide a runtime for server-side web components. The only dependency is Electron and Node.js, and you are free to install any compatible version: 
+Scram.js leverages Electron to provide a runtime for server-side web components. The only dependency is Electron and Node.js, and you are free to install any compatible version: 
 
 `npm install electron-prebuilt`
 
