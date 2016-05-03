@@ -6,8 +6,8 @@ const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
 
 const filename = process.argv[2] || 'index.html';
-const filepath = __dirname + '/' + filename; //development filepath from the scram-engine repo
-//const filepath = __dirname.split('/').slice(0, -2).join('/') + '/' + filename; //production filepath from the consumer repo (assumes first level of node_modules directory from root of repo)
+//const filepath = __dirname + '/' + filename; //development filepath from the scram-engine repo
+const filepath = __dirname.split('/').slice(0, -2).join('/') + '/' + filename; //production filepath from the consumer repo (assumes first level of node_modules directory from root of repo)
 
 let mainWindow = null;
 
