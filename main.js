@@ -3,7 +3,7 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const ipc = electron.ipcMain;
+const ipcMain = electron.ipcMain;
 
 const filename = process.argv[2] || 'index.html';
 const filepath = __dirname + '/' + filename; //development filepath from the scram-engine repo
@@ -18,6 +18,6 @@ app.on('ready', () => {
         console.log('after call to loadURL');
 });
 
-ipc.on('asynchronous-message', (e, ...args) => {
+ipcMain.on('asynchronous-message', (e, ...args) => {
     console.log(...args);
 });
