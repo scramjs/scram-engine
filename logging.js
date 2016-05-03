@@ -1,4 +1,4 @@
-const ipc = require('ipc');
+const ipc = electron.ipcMain;
 
 //TODO get this to work for all console methods and any number of parameters
 window.console.log = (...theArgs) => {

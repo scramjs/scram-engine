@@ -18,6 +18,6 @@
     "electron-prebuilt": "^0.37.7"
   },
   "scripts": {
-    "start": "electron cli.js index.html"
+    "start": "electron main.js example/index.html"
   }
 }
