@@ -22,7 +22,7 @@ TODO explain the need for xvfb, and offer help with the electron-prebuilt librar
 ## Usage
 Provide Electron with the main.js script from this repo and then the path to your starting html file:
 
-`electron node_modules/scram-engine/main.js index.html`
+`node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
 
 It might be convenient to create a script in your package.json:
 
