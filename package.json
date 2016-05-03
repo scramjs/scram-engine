@@ -1,9 +1,6 @@
 {
   "name": "scram-engine",
   "version": "0.0.0",
-  "bin": {
-    "scram-engine": "./cli.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lastmjs/scram-engine.git"
