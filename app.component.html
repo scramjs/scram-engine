@@ -1,17 +1,17 @@
 <link rel="import" href="node_modules/@polymer/polymer/polymer.html">
 
-<link rel="import" href="node_modules/scram-express/scram-express-app.html">
-<link rel="import" href="node_modules/scram-express/scram-express-middleware.html">
+<link rel="import" href="node_modules/express-web-components/express-app.html">
+<link rel="import" href="node_modules/express-web-components/express-middleware.html">
 
 <dom-module id="app-component">
     <template>
-        <scram-express-app port="8000">
-            <scram-express-middleware method="get" path="/" callback="[[indexController]]"></scram-express-middleware>
-            <scram-express-middleware method="get" path="/1" callback="[[indexController]]"></scram-express-middleware>
-            <scram-express-middleware method="get" path="/2" callback="[[indexController]]"></scram-express-middleware>
-            <scram-express-middleware method="get" path="/3" callbacks="[[callbacks]]"></scram-express-middleware>
-            <scram-express-middleware callback="[[errorHandler]]"></scram-express-middleware>
-        </scram-express-app>
+        <express-app port="8000">
+            <express-middleware method="get" path="/" callback="[[indexController]]"></express-middleware>
+            <express-middleware method="get" path="/1" callback="[[indexController]]"></express-middleware>
+            <express-middleware method="get" path="/2" callback="[[indexController]]"></express-middleware>
+            <express-middleware method="get" path="/3" callbacks="[[callbacks]]"></express-middleware>
+            <express-middleware callback="[[errorHandler]]"></express-middleware>
+        </express-app>
     </template>
 
     <script>
