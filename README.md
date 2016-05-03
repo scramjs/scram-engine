@@ -38,6 +38,8 @@ To enable logging to the console from any scripts called from your html file, in
 
 `<script src="node_modules/scram-engine/logging.js"></script>`
 
+To get the example included in this repo to work, you must manually edit lines 10 and 11 in main.js (sorry, I'm sure this will be dealt with eventually). Just uncomment line 10 and comment line 11, then run `npm start`.
+
 ## Compatibility and Testing
 Currently only tested manually with Node.js v6.0.0 and electron-prebuilt v0.37.8.
 
