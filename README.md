@@ -7,7 +7,9 @@ This repo only offers access to the runtime necessary to use server-side web com
 * Express Web Components: https://github.com/scramjs/express-web-components
 
 ## Examples
-Here are some example Express apps that have been rewritten with web components:
+Here are some example Express apps that have been or are in the process of being rewritten with web components:
+* https://github.com/scramjs/rest-api-express
+* https://github.com/scramjs/node-api
 
 ## Development Installation
 ScramJS leverages Electron to provide a runtime for server-side web components. The only dependency is Electron and Node.js, and you are free to install any compatible version: 
