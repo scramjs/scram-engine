@@ -31,7 +31,7 @@ It might be convenient to create a script in your package.json:
   "name": "awesome-repo",
   "version": "2.4.2",
   "scripts": {
-    "start": "electron main.js index.html"
+    "start": "electron node_modules/scram-engine/main.js index.html"
   }
 }
 ````
