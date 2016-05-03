@@ -7,7 +7,9 @@ This repo only offers access to the runtime necessary to use server-side web com
 * Express Web Components: https://github.com/scramjs/express-web-components
 
 ## Examples
-Here are some example Express apps that have been rewritten with web components:
+Here are some example Express apps that have been or are in the process of being rewritten with web components:
+* https://github.com/scramjs/rest-api-express
+* https://github.com/scramjs/node-api
 
 ## Development Installation
 ScramJS leverages Electron to provide a runtime for server-side web components. The only dependency is Electron and Node.js, and you are free to install any compatible version: 
@@ -20,7 +22,7 @@ TODO explain the need for xvfb, and offer help with the electron-prebuilt librar
 ## Usage
 Provide Electron with the main.js script from this repo and then the path to your starting html file:
 
-`electron node_modules/scram-engine/main.js index.html`
+`node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
 
 It might be convenient to create a script in your package.json:
 
@@ -37,6 +39,8 @@ It might be convenient to create a script in your package.json:
 To enable logging to the console from any scripts called from your html file, include the following script in your html file before all other scripts that will log to the console:
 
 `<script src="node_modules/scram-engine/logging.js"></script>`
+
+To get the example included in this repo to work, you must manually edit lines 10 and 11 in main.js (sorry, I'm sure this will be dealt with eventually). Just uncomment line 10 and comment line 11, then run `npm start`.
 
 ## Compatibility and Testing
 Currently only tested manually with Node.js v6.0.0 and electron-prebuilt v0.37.8.
