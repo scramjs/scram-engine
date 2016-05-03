@@ -1,13 +1,21 @@
 #!/usr/bin/env node
-var exec = require('child_process').exec;
-var cmd = 'cd node_modules/scram-engine && npm start';
 
-var newProcess = exec(cmd);
+const filename = process.argv[2] || 'index.html';
 
-newProcess.stdout.on('data', function(data) {
-    console.log(data);
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const ipc = electron.ipcMain;
+
+let mainWindow = null;
+
+app.on('ready', () => {
+        mainWindow = new BrowserWindow({show:false});
+        console.log('before call to loadURL');
+        mainWindow.loadURL(`file://${__dirname}/${filename}`);
+        console.log('after call to loadURL');
 });
 
-newProcess.stderr.on('data', function(data) {
-    console.log(data);
+ipc.on('asynchronous-message', (e, ...args) => {
+    console.log(...args);
 });
