@@ -20,6 +20,7 @@
   "license": "MIT",
   "keywords": ["web-components"],
   "scripts": {
-    "start": "electron main.js example/index.html"
+    "start": "electron main.js example/index.html",
+    "start-dev": "electron main.js example/index.html -d"
   }
 }
