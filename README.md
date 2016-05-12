@@ -17,9 +17,28 @@ Scram.js leverages Electron to provide a runtime for server-side web components.
 `npm install electron-prebuilt`
 
 ## Production Installation
-TODO explain the need for xvfb, and offer help with the electron-prebuilt libraries that might be missing
+Since Electron needs a graphical environment for rendering on headless Linux® machines, you may need to install Xvfb to provide a display server.
+
+On Ubuntu: `sudo apt-get install xvfb`
+
+Electron might require one or more of the following libraries to be installed on certain Ubuntu systems: 
+
+```
+libgtk2.0-0
+libnotify-bin
+Libgconf-2-4
+```
+
+### Dokku
+Scram.js works well with [Dokku](http://dokku.viewdocs.io/dokku/). Dokku provides a personal PaaS, making it easy to deploy to a production environment.
+* Follow the [official documentation](http://dokku.viewdocs.io/dokku/installation/) to install Dokku
+* Install this [Dokku plugin](https://github.com/F4-Group/dokku-apt) to allow Dokku to automatically install Xvfb and other packages your application might need
+* Add a file to the root directory of your app called `apt-packages`
+* List the packages you would like Dokku to install: e.g. xvfb libgtk2.0-0 libnotify-bin Libgconf-2-4
+* For a full working example of an application deployed with Dokku, see the [Dokku Example](https://github.com/scramjs/dokku-example)
 
 ## Usage
+### Development
 Provide Electron with the main.js script from this repo and then the path to your starting html file:
 
 `node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
@@ -36,14 +55,31 @@ It might be convenient to create a script in your package.json:
 }
 ````
 
-To enable logging to the console from any scripts called from your html file, include the following script in your html file before all other scripts that will log to the console:
+To open up an Electron window for access to the dev tools, add the `-d` option:
 
-`<script src="node_modules/scram-engine/logging.js"></script>`
+`node_modules/.bin/electron node_modules/scram-engine/main.js index.html -d`
 
-To get the example included in this repo to work, you must manually edit lines 10 and 11 in main.js (sorry, I'm sure this will be dealt with eventually). Just uncomment line 10 and comment line 11, then run `npm start`.
+### Production
+You need to add the xvfb-run command in front of all of the other commands on headless Linux machines:
+
+`xvfb-run node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
+
+It might be convenient to create a script in your package.json:
+
+```
+{
+  "name": "awesome-repo",
+  "version": "2.4.2",
+  "scripts": {
+    "start": "xvfb-run electron node_modules/scram-engine/main.js index.html"
+  }
+}
+````
 
 ## Compatibility and Testing
 Currently only tested manually with Node.js v6.0.0 and electron-prebuilt v0.37.8.
 
 Node.js is a trademark of Joyent, Inc. and is used with its permission. We are not endorsed by or
 affiliated with Joyent.
+
+Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
