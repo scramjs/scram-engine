@@ -20,7 +20,7 @@ npm install --save scram-engine
 ```
 
 ## Production Installation
-Since Electron needs a graphical environment for rendering on headless Linux® machines, you may need to install Xvfb to provide a display server.
+There are a few more considerations in a production environment. Since Electron needs a graphical environment for rendering on headless Linux® machines, you may need to install Xvfb to provide a display server.
 
 On Ubuntu: `sudo apt-get install xvfb`
 
