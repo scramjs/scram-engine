@@ -92,6 +92,9 @@ It might be convenient to create a script in your package.json:
     "start": "xvfb-run electron node_modules/scram-engine/main.js index.html",
     "dev": "electron node_modules/scram-engine/main.js index.html",
     "dev-window": "electron node_modules/scram-engine/main.js index.html -d"
+  },
+  "engines": {
+    "node": "6.0.0"
   }
 }
 ````
