@@ -75,7 +75,7 @@ or
 ```
 
 ### Production
-You need to add the xvfb-run command in front of all of the other commands on headless Linux machines:
+You need to add the xvfb-run command in front of all other commands on headless Linux machines:
 
 `xvfb-run node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
 
