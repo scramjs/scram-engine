@@ -86,13 +86,15 @@ It might be convenient to create a script in your package.json:
   "name": "awesome-repo",
   "version": "2.4.2",
   "scripts": {
-    "start": "xvfb-run electron node_modules/scram-engine/main.js index.html"
+    "start": "xvfb-run electron node_modules/scram-engine/main.js index.html",
+    "dev": "xvfb-run electron node_modules/scram-engine/main.js index.html",
+    "dev-window": "xvfb-run electron node_modules/scram-engine/main.js index.html -d"
   }
 }
 ````
 
 ## Compatibility and Testing
-Currently only tested manually with Node.js v6.0.0 and electron-prebuilt v0.37.8.
+Only manually tested at the moment. PR with tests if you'd like :)
 
 Node.js is a trademark of Joyent, Inc. and is used with its permission. We are not endorsed by or
 affiliated with Joyent.
