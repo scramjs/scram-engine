@@ -87,8 +87,8 @@ It might be convenient to create a script in your package.json:
   "version": "2.4.2",
   "scripts": {
     "start": "xvfb-run electron node_modules/scram-engine/main.js index.html",
-    "dev": "xvfb-run electron node_modules/scram-engine/main.js index.html",
-    "dev-window": "xvfb-run electron node_modules/scram-engine/main.js index.html -d"
+    "dev": "electron node_modules/scram-engine/main.js index.html",
+    "dev-window": "electron node_modules/scram-engine/main.js index.html -d"
   }
 }
 ````
