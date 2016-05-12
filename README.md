@@ -42,7 +42,7 @@ Scram.js works well with [Dokku](http://dokku.viewdocs.io/dokku/). Dokku provide
 
 ## Usage
 ### Development
-Provide Electron with the main.js script from this repo and then the path to your starting html file:
+Provide Electron with the main.js script from this repo and then the path to your starting html file from the root directory of your app:
 
 `node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
 
