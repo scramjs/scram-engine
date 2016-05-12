@@ -56,11 +56,23 @@ It might be convenient to create a script in your package.json:
     "start": "electron node_modules/scram-engine/main.js index.html"
   }
 }
-````
+```
 
 To open up an Electron window for access to the dev tools, add the `-d` option:
 
 `node_modules/.bin/electron node_modules/scram-engine/main.js index.html -d`
+
+or
+
+```
+{
+  "name": "awesome-repo",
+  "version": "2.4.2",
+  "scripts": {
+    "start": "electron node_modules/scram-engine/main.js index.html -d"
+  }
+}
+```
 
 ### Production
 You need to add the xvfb-run command in front of all of the other commands on headless Linux machines:
