@@ -11,10 +11,6 @@
   },
   "homepage": "https://github.com/lastmjs/scram-engine#readme",
   "devDependencies": {
-    "@polymer/polymer": "^1.2.5-npm-test.2",
-    "electron-prebuilt": "^0.37.8",
-    "express": "^4.13.4",
-    "express-web-components": "git+ssh://git@github.com/scramjs/express-web-components.git"
   },
   "dependencies": {},
   "license": "MIT",
