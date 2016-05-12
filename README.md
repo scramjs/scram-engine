@@ -38,6 +38,7 @@ Scram.js works well with [Dokku](http://dokku.viewdocs.io/dokku/). Dokku provide
 * Install this [Dokku plugin](https://github.com/F4-Group/dokku-apt) to allow Dokku to automatically install Xvfb and other packages your application might need
 * Add a file to the root directory of your app called `apt-packages`
 * List the packages you would like Dokku to install: e.g. xvfb libgtk2.0-0 libnotify-bin Libgconf-2-4
+* In your app's package.json, ensure that the dependencies are listed correctly, and add a `start` script for Dokku to use to start your application
 * For a full working example of an application deployed with Dokku, see the [Dokku Example](https://github.com/scramjs/dokku-example)
 
 ## Usage
