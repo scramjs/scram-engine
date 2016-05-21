@@ -82,6 +82,10 @@ You need to add the xvfb-run command in front of all other commands on headless 
 
 `xvfb-run node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
 
+If you are using bower to install the Polymer library and other web components (you probably are), you need your development server's build process to install the bower components when deploying:
+
+`npm install -g bower && bower install`
+
 It might be convenient to create a script in your package.json:
 
 ```
@@ -89,7 +93,7 @@ It might be convenient to create a script in your package.json:
   "name": "awesome-repo",
   "version": "2.4.2",
   "scripts": {
-    "start": "xvfb-run electron node_modules/scram-engine/main.js index.html",
+    "start": "npm install -g bower && bower install && xvfb-run electron node_modules/scram-engine/main.js index.html",
     "dev": "electron node_modules/scram-engine/main.js index.html",
     "dev-window": "electron node_modules/scram-engine/main.js index.html -d"
   },
