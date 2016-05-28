@@ -1,6 +1,6 @@
 {
   "name": "scram-engine",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Provides access to markup rendering in Node.js. Write your server semantically and declaratively with web components.",
   "repository": {
     "type": "git",
