@@ -5,7 +5,7 @@ const getIndexURL = (loadFromFile, filename, localPort) => {
     const createFileURL = (filename) => {
         const path = require('path');
         const resolvePath = path.resolve(__dirname, '../../');
-        return `file://${path}/${filename}`;
+        return `file://${resolvePath}/${filename}`;
     };
 
     const createServerURL = (filename, localPort) => {
