@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-const getIndexURL = (loadFromFile, filename, devPort) => {
+const getIndexURL = (loadFromFile, filename, localPort) => {
 
     const createFileURL = (filename) => {
         return `file://${__dirname}/${filename}`;
     };
 
-    const createServerURL = (filename, devPort) => {
+    const createServerURL = (filename, localPort) => {
         const protocol = 'http';
         const domain = 'localhost';
-        const port = `:${devPort}/`;
+        const port = `:${localPort}/`;
 
         return `${protocol}://${domain}${port}${filename}`;
     };
@@ -18,12 +18,12 @@ const getIndexURL = (loadFromFile, filename, devPort) => {
         return createFileURL(filename);
     }
     else {
-        return createServerURL(filename, devPort);
+        return createServerURL(filename, localPort);
     }
 };
 
-const startLocalServer = (devPort) => {
-    require('child_process').exec(`cd ../../ && scramjs/scram-engine/node_modules/.bin/http-server -p ${devPort}`, (err, stdout, stderr) => {
+const startLocalServer = (localPort) => {
+    require('child_process').exec(`cd ../../ && node_modules/scram-engine/node_modules/.bin/http-server -p ${localPort}`, (err, stdout, stderr) => {
         if (!err) {
             console.log(stdout);
         }
@@ -65,13 +65,13 @@ const init = () => {
     const filename = process.argv[2];
     const devMode = argOptions.includes('-d');
     const loadFromFile = argOptions.includes('-f');
-    const devPort = argOptions.includes('-p') ? argOptions[argOptions.indexOf('-p') + 1] : '5050';
+    const localPort = argOptions.includes('-p') ? argOptions[argOptions.indexOf('-p') + 1] : '5050';
 
     if (!loadFromFile) {
-        startLocalServer(devPort);
+        startLocalServer(localPort);
     }
 
-    launchApp(getIndexURL(loadFromFile, filename, devPort), devMode);
+    launchApp(getIndexURL(loadFromFile, filename, localPort), devMode);
 };
 
 init();
