@@ -10,13 +10,16 @@
     "url": "https://github.com/lastmjs/scram-engine/issues"
   },
   "homepage": "https://github.com/lastmjs/scram-engine#readme",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
+    "http-server": "^0.9.0"
   },
-  "dependencies": {},
   "license": "MIT",
-  "keywords": ["web-components"],
+  "keywords": [
+    "web-components"
+  ],
   "scripts": {
-    "start": "electron main.js example/index.html",
-    "start-dev": "electron main.js example/index.html -d"
+    "start": "electron main.js index.html",
+    "start-dev": "electron main.js index.html -d"
   }
 }

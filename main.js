@@ -5,23 +5,45 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
 
+const argOptions = process.argv.slice(3);
+
 const filename = process.argv[2];
-const devMode = process.argv[3] === '-d' ? true : false;
-const filepath = __dirname.split('/').slice(0, -2).join('/') + '/' + filename;
+const devMode = argOptions.includes('-d') ? true : false;
 
-let mainWindow = null;
+const protocol = 'http';
+const domain = 'localhost';
+const port = ':5001';
 
-app.on('ready', () => {
-        mainWindow = new BrowserWindow({
-            show: devMode
-        });
-        mainWindow.loadURL(`file://${filepath}`);
-
-        if (devMode) {
-            mainWindow.webContents.openDevTools();
+const startLocalServer = () => {
+    require('child_process').exec(`node_modules/.bin/http-server -p 5001`, (err, stdout, stderr) => {
+        if (!err) {
+            console.log(stdout);
         }
-});
+        else {
+            console.log(stderr);
+        }
+    });
+};
 
-ipcMain.on('asynchronous-message', (e, ...args) => {
-    console.log(...args);
-});
+const launchApp = () => {
+    let mainWindow = null;
+
+    app.on('ready', () => {
+            mainWindow = new BrowserWindow({
+                show: devMode
+            });
+
+            mainWindow.loadURL(`${protocol}://${domain}${port}/${filename}`);
+
+            if (devMode) {
+                mainWindow.webContents.openDevTools();
+            }
+    });
+
+    ipcMain.on('asynchronous-message', (e, ...args) => {
+        console.log(...args);
+    });
+};
+
+startLocalServer();
+launchApp();
