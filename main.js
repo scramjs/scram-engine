@@ -1,15 +1,5 @@
 #!/usr/bin/env node
 
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const ipcMain = electron.ipcMain;
-
-const argOptions = process.argv.slice(3);
-const filename = process.argv[2];
-const devMode = argOptions.includes('-d');
-const loadFromFile = argOptions.includes('-f');
-
 const getIndexURL = (loadFromFile, filename) => {
 
     const createFileURL = (filename) => {
@@ -43,7 +33,12 @@ const startLocalServer = () => {
     });
 };
 
-const launchApp = (indexURL) => {
+const launchApp = (indexURL, devMode) => {
+    const electron = require('electron');
+    const app = electron.app;
+    const BrowserWindow = electron.BrowserWindow;
+    const ipcMain = electron.ipcMain;
+
     let mainWindow = null;
 
     app.on('ready', () => {
@@ -64,10 +59,16 @@ const launchApp = (indexURL) => {
 };
 
 const init = () => {
+    const argOptions = process.argv.slice(3);
+    const filename = process.argv[2];
+    const devMode = argOptions.includes('-d');
+    const loadFromFile = argOptions.includes('-f');
+
     if (!loadFromFile) {
         startLocalServer();
     }
-    launchApp(getIndexURL(loadFromFile, filename));
+    
+    launchApp(getIndexURL(loadFromFile, filename), devMode);
 };
 
 init();
