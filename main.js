@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-const getIndexURL = (loadFromFile, filename) => {
+const getIndexURL = (loadFromFile, filename, devPort) => {
 
     const createFileURL = (filename) => {
         return `file://${__dirname}/${filename}`;
     };
 
-    const createServerURL = (filename) => {
+    const createServerURL = (filename, devPort) => {
         const protocol = 'http';
         const domain = 'localhost';
-        const port = ':5001/';
+        const port = `:${devPort}/`;
 
         return `${protocol}://${domain}${port}${filename}`;
     };
@@ -18,12 +18,12 @@ const getIndexURL = (loadFromFile, filename) => {
         return createFileURL(filename);
     }
     else {
-        return createServerURL(filename);
+        return createServerURL(filename, devPort);
     }
 };
 
-const startLocalServer = () => {
-    require('child_process').exec(`node_modules/.bin/http-server -p 5001`, (err, stdout, stderr) => {
+const startLocalServer = (devPort) => {
+    require('child_process').exec(`cd ../../ && scramjs/scram-engine/node_modules/.bin/http-server -p ${devPort}`, (err, stdout, stderr) => {
         if (!err) {
             console.log(stdout);
         }
@@ -38,6 +38,8 @@ const launchApp = (indexURL, devMode) => {
     const app = electron.app;
     const BrowserWindow = electron.BrowserWindow;
     const ipcMain = electron.ipcMain;
+
+    app.commandLine.appendSwitch('--disable-http-cache');
 
     let mainWindow = null;
 
@@ -63,12 +65,13 @@ const init = () => {
     const filename = process.argv[2];
     const devMode = argOptions.includes('-d');
     const loadFromFile = argOptions.includes('-f');
+    const devPort = argOptions.includes('-p') ? argOptions[argOptions.indexOf('-p') + 1] : '5050';
 
     if (!loadFromFile) {
-        startLocalServer();
+        startLocalServer(devPort);
     }
-    
-    launchApp(getIndexURL(loadFromFile, filename), devMode);
+
+    launchApp(getIndexURL(loadFromFile, filename, devPort), devMode);
 };
 
 init();
