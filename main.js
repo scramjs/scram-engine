@@ -23,7 +23,7 @@ const getIndexURL = (loadFromFile, filename, localPort) => {
 };
 
 const startLocalServer = (localPort) => {
-    require('child_process').exec(`cd ../../ && node_modules/.bin/http-server -p ${localPort}`, (err, stdout, stderr) => {
+    require('child_process').exec(`node_modules/.bin/http-server -p ${localPort}`, (err, stdout, stderr) => {
         if (!err) {
             console.log(stdout);
         }
