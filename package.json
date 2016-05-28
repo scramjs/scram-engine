@@ -20,6 +20,7 @@
   ],
   "scripts": {
     "start": "electron main.js index.html",
-    "start-dev": "electron main.js index.html -d"
+    "dev": "electron main.js index.html -d",
+    "dev-file": "electron main.js index.html -d -f"
   }
 }
