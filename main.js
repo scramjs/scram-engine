@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
+const path = require('path');
+
 const getIndexURL = (loadFromFile, filename, localPort) => {
 
     const createFileURL = (filename) => {
-        const path = require('path');
         const resolvePath = path.resolve(__dirname, '../../');
         return `file://${resolvePath}/${filename}`;
     };
@@ -35,7 +36,7 @@ const startLocalServer = (localPort) => {
     });
 };
 
-const launchApp = (indexURL, devMode) => {
+const launchApp = (indexURL, filename, devMode) => {
     const electron = require('electron');
     const app = electron.app;
     const BrowserWindow = electron.BrowserWindow;
@@ -46,15 +47,23 @@ const launchApp = (indexURL, devMode) => {
     let mainWindow = null;
 
     app.on('ready', () => {
-            mainWindow = new BrowserWindow({
-                show: devMode
-            });
 
-            mainWindow.loadURL(indexURL);
-
-            if (devMode) {
-                mainWindow.webContents.openDevTools();
+        mainWindow = new BrowserWindow({
+            show: devMode,
+            webPreferences: {
+                preload: path.resolve(__dirname, `require-config.js`)
             }
+        });
+
+        mainWindow.getFilename = () => {
+            return filename;
+        };
+
+        mainWindow.loadURL(indexURL);
+
+        if (devMode) {
+            mainWindow.webContents.openDevTools();
+        }
     });
 
     ipcMain.on('asynchronous-message', (e, ...args) => {
@@ -73,7 +82,7 @@ const init = () => {
         startLocalServer(localPort);
     }
 
-    launchApp(getIndexURL(loadFromFile, filename, localPort), devMode);
+    launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode);
 };
 
 init();
