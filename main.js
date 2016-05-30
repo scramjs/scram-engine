@@ -36,7 +36,7 @@ const startLocalServer = (localPort) => {
     });
 };
 
-const launchApp = (indexURL, filename, devMode) => {
+const launchApp = (indexURL, filename, devMode, loadFromFile) => {
     const electron = require('electron');
     const app = electron.app;
     const BrowserWindow = electron.BrowserWindow;
@@ -48,10 +48,19 @@ const launchApp = (indexURL, filename, devMode) => {
 
     app.on('ready', () => {
 
+        const getPreload = (loadFromFile) => {
+            if (loadFromFile) {
+                return path.resolve(__dirname, `index-config.js`);
+            }
+            else {
+                return '';
+            }
+        };
+
         mainWindow = new BrowserWindow({
             show: devMode,
             webPreferences: {
-                preload: path.resolve(__dirname, `index-config.js`)
+                preload: getPreload(loadFromFile)
             }
         });
 
@@ -82,7 +91,7 @@ const init = () => {
         startLocalServer(localPort);
     }
 
-    launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode);
+    launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
 };
 
 init();
