@@ -51,13 +51,17 @@ const launchApp = (indexURL, filename, devMode) => {
         mainWindow = new BrowserWindow({
             show: devMode,
             webPreferences: {
-                preload: path.resolve(__dirname, `require-config.js`)
+                preload: path.resolve(__dirname, `index-config.js`)
             }
         });
 
         mainWindow.getFilename = () => {
             return filename;
         };
+
+        // mainWindow.getConsoleLog = () => {
+        //     return console.log;
+        // };
 
         mainWindow.loadURL(indexURL);
 
