@@ -30,6 +30,7 @@ Electron might require one or more of the following libraries to be installed on
 libgtk2.0-0
 libnotify-bin
 Libgconf-2-4
+libxss1
 ```
 
 ### Dokku
