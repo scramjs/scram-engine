@@ -65,10 +65,6 @@ const launchApp = (indexURL, filename, devMode) => {
             mainWindow.webContents.openDevTools();
         }
     });
-
-    ipcMain.on('asynchronous-message', (e, ...args) => {
-        console.log(...args);
-    });
 };
 
 const init = () => {

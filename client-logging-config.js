@@ -1,6 +1,3 @@
-const ipcRenderer = require('electron').ipcRenderer;
+const remote = require('electron').remote;
 
-//TODO get this to work for all console methods and any number of parameters
-console.log = (...theArgs) => {
-    ipcRenderer.send('asynchronous-message', ...theArgs);
-};
+window.console.log = remote.log;
