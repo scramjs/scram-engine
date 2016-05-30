@@ -49,7 +49,7 @@ const launchApp = (indexURL, filename, devMode, loadFromFile) => {
     app.on('ready', () => {
 
         const getPreload = (loadFromFile) => {
-            if (loadFromFile) {
+            if (!loadFromFile) {
                 return path.resolve(__dirname, `index-config.js`);
             }
             else {
