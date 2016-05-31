@@ -112,18 +112,18 @@ It is important to understand the two different ways in which your starting `htm
 ##### Local Server
 By default, unless you add the `-f` option when starting the application, the specified starting `html` file is loaded into an Electron BrowserWindow from a local `http` server running on the following address: 0.0.0.0:5050. The port can be changed with the `-p` option. Loading the starting `html` file from a local server allows your server-side application to emulate a client-side application more faithfully. For example, client-side requests that rely on the protocol of their environment will have the protocol set to `http` and the domain to `localhost`, making life much easier than trying to do the same thing with the protocol set to `file`.
 
-Loading the starting `html` file from a local server might cause some problems whenever you are dealing with the filesystem, so be aware of that when requiring or doing anything with filesystem paths. `require` seems to be working well, along with `__dirname` and `__filename`, but I have not tested filesystem access through the `fs` module yet. If problems arise, please file issues.
+Loading the starting `html` file from a local server will cause `__dirname` and `__filename` to be incorrect for any web components included from your starting `html` file. You must include `filesystem-config.js` before any code that relies on `__dirname` or `__filename` to correct those issues.
 
 ##### Filesystem
-The `-f` option will allow you to load your starting `html` file from the filesystem. Doing this will help you escape any issues you might have with `require` or the filesystem, but may cause other issues because the protocol is set to `file`. If you need solid filesystem access and can handle using the `file` protocol, then this might be the better option.
+The `-f` option will allow you to load your starting `html` file from the filesystem. Be aware that this may cause issues if you are using client-side code because the protocol is set to `file`.
 
 ##### Require
-Any relative requires should be done relative to the starting `html` file when requiring from within an imported web component. When requiring from within a required module, relative requires should be done relative to the module.
+Any relative requires should be done relative to the starting `html` file when requiring from within an imported web component. When requiring from within a required module, relative requires should be done relative to the module (normal require behavior).
 
 ##### `__dirname` and `__filename`
-`__dirname` and `__filename` are set relative to the starting `html` file, and should be the same across all components imported throughout your application. `__dirname` and `__filename` inside of required modules are relative to the starting `html` file.
+`__dirname` and `__filename` are set relative to the starting `html` file, and should be the same across all components imported throughout your application. `__dirname` and `__filename` inside of required modules act as expected.
 
-When loading the starting `html` file from the local server, you must include the `filesystem-config.js` file before referencing `__dirname` or `__filename`:
+When loading the starting `html` file from the local server, you must include the `filesystem-config.js` file before referencing `__dirname` or `__filename` in any imported web components:
 
 ```
 <script src="node_modules/scram-engine/filesystem-config.js"></script>
