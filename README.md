@@ -46,7 +46,7 @@ Scram.js works well with [Dokku](http://dokku.viewdocs.io/dokku/). Dokku provide
 
 ## Usage
 ### Development
-Provide Electron with the main.js script from this repo and then the path to your starting html file from the root directory of your app:
+Provide Electron with the main.js script from this repo and then the path to your starting `html` file from the root directory of your app:
 
 `node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
 
@@ -107,10 +107,10 @@ It might be convenient to create a script in your package.json:
 ### Special Considerations
 
 #### Loading Start File
-It is important to understand the two different ways in which your starting HTML file is loaded into Electron as each has subtle differences in behavior:
+It is important to understand the two different ways in which your starting `html` file is loaded into Electron as each has subtle differences in behavior:
 
 ##### Local Server
-By default, unless you add the `-f` option when starting the application, the specified starting HTML file is loaded into an Electron BrowserWindow from a local HTTP server running on the following address: 0.0.0.0:5050. The port can be changed with the `-p` option. Loading the starting HTML file from a local server allows your server-side application to emulate a client-side application more faithfully. For example, client-side requests that rely on the protocol of their environment will have the protocol set to `http` and the domain to `localhost`, making life much easier than trying to do the same thing with the protocol set to `file`.
+By default, unless you add the `-f` option when starting the application, the specified starting `html` file is loaded into an Electron BrowserWindow from a local HTTP server running on the following address: 0.0.0.0:5050. The port can be changed with the `-p` option. Loading the starting `html` file from a local server allows your server-side application to emulate a client-side application more faithfully. For example, client-side requests that rely on the protocol of their environment will have the protocol set to `http` and the domain to `localhost`, making life much easier than trying to do the same thing with the protocol set to `file`.
 
 Loading the starting `html` file from a local server might cause some problems whenever you are dealing with the filesystem, so be aware of that when requiring or doing anything with filesystem paths. `require` seems to be working well, along with `__dirname` and `__filename`, but I have not tested filesystem access yet. If problems arise, please file issues.
 
@@ -127,8 +127,8 @@ Any relative requires should be done relative to the starting `html` file.
 There are various options available when loading your application with Scram.js:
 
 * `-d`: Open a browser window for debugging
-* `-f`: Load the starting HTML file from the filesystem
-* `-p`: Specify the port the local server uses to load the starting HTML file
+* `-f`: Load the starting `html` file from the filesystem
+* `-p`: Specify the port the local server uses to load the starting `html` file
 
 ## Compatibility and Testing
 Only manually tested at the moment. PR with tests if you'd like :)
