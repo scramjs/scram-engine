@@ -118,7 +118,7 @@ Loading the starting `html` file from a local server might cause some problems w
 The `-f` option will allow you to load your starting `html` file from the filesystem. Doing this will help you escape any issues you might have with `require` or the filesystem, but may cause other issues because the protocol is set to `file`. If you need solid filesystem access and can handle using the `file` protocol, then this might be the better option.
 
 ##### Require
-Any relative requires should be done relative to the starting `html` file.
+Any relative requires should be done relative to the starting `html` file when requiring from within an imported web component. When requiring from within a required module, relative requires should be done relative to the module.
 
 ##### `__dirname` and `__filename`
 `__dirname` and `__filename` are set relative to the starting `html` file, and should be the same across all components imported throughout your application. `__dirname` and `__filename` inside of required modules are relative to the starting `html` file.
