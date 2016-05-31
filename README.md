@@ -121,7 +121,7 @@ The `-f` option will allow you to load your starting `html` file from the filesy
 Any relative requires should be done relative to the starting `html` file.
 
 ##### `__dirname` and `__filename`
-`__dirname` and `__filename` are fixed for the entire application, and are set relative to the starting `html` file.
+`__dirname` and `__filename` are set relative to the starting `html` file, and should be the same across all components imported throughout your application. `__dirname` and `__filename` inside of required modules are relative to the starting `html` file.
 
 ### Options
 There are various options available when loading your application:
