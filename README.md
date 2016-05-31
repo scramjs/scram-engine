@@ -125,7 +125,11 @@ Any relative requires should be done relative to the starting `html` file.
 
 When loading the starting `html` file from the local server, you must include the `filesystem-config.js` file before referencing `__dirname` or `__filename`:
 
-`<script src="node_modules/scram-engine/filesystem-config.js"></script>`
+```
+<script src="node_modules/scram-engine/filesystem-config.js"></script>
+```
+
+Do not include this file when loading the starting `html` file from the filesystem.
 
 ### Options
 There are various options available when loading your application:
