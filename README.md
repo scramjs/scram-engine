@@ -123,9 +123,9 @@ Any relative requires should be done relative to the starting `html` file.
 ##### `__dirname` and `__filename`
 `__dirname` and `__filename` are set relative to the starting `html` file, and should be the same across all components imported throughout your application. `__dirname` and `__filename` inside of required modules are relative to the starting `html` file.
 
-When loading the starting `html` file from the local server, you must include the `filesystem-config.js` file before accessing the filesystem:
+When loading the starting `html` file from the local server, you must include the `filesystem-config.js` file before referencing `__dirname` or `__filename`:
 
-`<script src="node_modules/scram-engine/filesystem-config.js"></script>
+`<script src="node_modules/scram-engine/filesystem-config.js"></script>`
 
 ### Options
 There are various options available when loading your application:
