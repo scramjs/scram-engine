@@ -1,15 +1,13 @@
 {
-  "name": "scram-engine",
+  "name": "scram-nwjs",
   "version": "0.2.2",
   "description": "Provides access to markup rendering in Node.js. Write your server semantically and declaratively with web components.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lastmjs/scram-engine.git"
+    "url": "git+https://github.com/zacanger/scram-nwjs.git"
   },
-  "bugs": {
-    "url": "https://github.com/lastmjs/scram-engine/issues"
-  },
-  "homepage": "https://github.com/lastmjs/scram-engine#readme",
+  "bugs": "https://github.com/zacanger/scram-nwjs/issues",
+  "homepage": "https://github.com/zacanger/scram-nwjs#readme",
   "devDependencies": {},
   "dependencies": {
     "http-server": "^0.9.0"
@@ -25,3 +23,4 @@
     "dev-file": "electron main.js index.html -d -f"
   }
 }
+
