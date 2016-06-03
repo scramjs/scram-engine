@@ -1,6 +1,11 @@
-const path = require('path');
+import path from 'path'
+import electron from 'electron'
 
-const filename = require('electron').remote.getCurrentWindow().getFilename();
+// todo: fix the below, they're electron-specific
 
-__dirname = path.resolve(__dirname, '../../../../../../', filename.split('/').slice(0, -1).join('/')); //TODO this path is possibly subject to change if Electron changes its file structure
-__filename = path.resolve(__dirname, '../../../../../../', filename); //TODO this path is possibly subject to change if Electron changes its file structure
+const filename = electron.remote.getCurrentWindow().getFilename()
+
+
+__dirname = path.resolve(__dirname, '../../../../../../', filename.split('/').slice(0, -1).join('/'))
+__filename = path.resolve(__dirname, '../../../../../../', filename)
+
