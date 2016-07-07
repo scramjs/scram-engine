@@ -12,6 +12,7 @@ Here are some example Express.js apps that have been rewritten with web componen
 * https://github.com/scramjs/node-api
 * https://github.com/scramjs/node-todo
 * https://github.com/scramjs/node-tutorial-2-restful-app
+* https://github.com/scramjs/node-tutorial-for-frontend-devs
 
 ## Development Installation
 Scram.js leverages Electron to provide a runtime for server-side web components. The only dependency is Electron and Node.js, and you are free to install any compatible version: 
