@@ -17,11 +17,5 @@
   "license": "MIT",
   "keywords": [
     "web-components"
-  ],
-  "scripts": {
-    "start": "electron main.js index.html",
-    "dev": "electron main.js index.html -d",
-    "dev-port": "electron main.js index.html -d -p 7654",
-    "dev-file": "electron main.js index.html -d -f"
-  }
+  ]
 }
