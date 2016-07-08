@@ -10,6 +10,9 @@ This repo only offers access to the runtime necessary to use server-side web com
 Here are some example Express.js apps that have been rewritten with web components:
 * https://github.com/scramjs/rest-api-express
 * https://github.com/scramjs/node-api
+* https://github.com/scramjs/node-todo
+* https://github.com/scramjs/node-tutorial-2-restful-app
+* https://github.com/scramjs/node-tutorial-for-frontend-devs
 
 ## Development Installation
 Scram.js leverages Electron to provide a runtime for server-side web components. The only dependency is Electron and Node.js, and you are free to install any compatible version: 
@@ -38,15 +41,15 @@ Scram.js works well with [Dokku](http://dokku.viewdocs.io/dokku/). Dokku provide
 * Follow the [official documentation](http://dokku.viewdocs.io/dokku/installation/) to install Dokku
 * Install this [Dokku plugin](https://github.com/F4-Group/dokku-apt) to allow Dokku to automatically install Xvfb and other packages your application might need
 * Add a file to the root directory of your app called `apt-packages`
-* List the packages you would like Dokku to install: e.g. xvfb libgtk2.0-0 libnotify-bin Libgconf-2-4
-* Ensure that the dependencies are listed correctly in your app's package.json
+* List the packages you would like Dokku to install: e.g. xvfb libgtk2.0-0 libnotify-bin Libgconf-2-4 libxss1
+* Ensure that dependencies are listed correctly in your app's package.json
 * Add a `start` script in your app's package.json for Dokku to use to start your application
 * Add an `engines` property to your app's package.json to specify the version of node Dokku will use to run your app
 * For a full working example of an application deployed with Dokku, see the [Dokku Example](https://github.com/scramjs/dokku-example)
 
 ## Usage
 ### Development
-Provide Electron with the main.js script from this repo and then the path to your starting html file from the root directory of your app:
+Provide Electron with the main.js script from this repo and then the path to your starting `html` file from the root directory of your app:
 
 `node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
 
@@ -103,6 +106,40 @@ It might be convenient to create a script in your package.json:
   }
 }
 ````
+
+### Special Considerations
+
+#### Loading Start File
+It is important to understand the two different ways in which your starting `html` file is loaded into Electron, as each has subtle differences in behavior:
+
+##### Local Server
+By default, unless you add the `-f` option when starting the application, the specified starting `html` file is loaded into an Electron BrowserWindow from a local `http` server running on the following address: 0.0.0.0:5050. The port can be changed with the `-p` option. Loading the starting `html` file from a local server allows your server-side application to emulate a client-side application more faithfully. For example, client-side requests that rely on the protocol of their environment will have the protocol set to `http` and the domain to `localhost`, making life much easier than trying to do the same thing with the protocol set to `file`.
+
+Loading the starting `html` file from a local server will cause `__dirname` and `__filename` to be incorrect for any web components included from your starting `html` file. You must include `filesystem-config.js` before any code that relies on `__dirname` or `__filename` to correct those issues.
+
+##### Filesystem
+The `-f` option will allow you to load your starting `html` file from the filesystem. Be aware that this may cause issues if you are using client-side code because the protocol is set to `file`.
+
+##### Require
+Any relative requires should be done relative to the starting `html` file when requiring from within an imported web component. When requiring from within a required module, relative requires should be done relative to the module (normal require behavior).
+
+##### `__dirname` and `__filename`
+`__dirname` and `__filename` are set relative to the starting `html` file, and should be the same across all components imported throughout your application. `__dirname` and `__filename` inside of required modules act as expected.
+
+When loading the starting `html` file from the local server, you must include the `filesystem-config.js` file before referencing `__dirname` or `__filename` in any imported web components:
+
+```
+<script src="node_modules/scram-engine/filesystem-config.js"></script>
+```
+
+Do not include this file when loading the starting `html` file from the filesystem.
+
+### Options
+There are various options available when loading your application:
+
+* `-d`: Open a browser window for debugging
+* `-f`: Load the starting `html` file from the filesystem
+* `-p`: Specify the port the local server uses to load the starting `html` file
 
 ## Compatibility and Testing
 Only manually tested at the moment. PR with tests if you'd like :)
