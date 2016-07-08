@@ -1,20 +1,20 @@
-const path = require('path');
+const scramPathModule = require('path');
 
 const filename = require('electron').remote.getCurrentWindow().getFilename();
 
-const appNodeModulesRoot = path.resolve(__dirname, '../../', 'node_modules');
+const appNodeModulesRoot = scramPathModule.resolve(__dirname, '../../', 'node_modules');
 require('module').globalPaths.push(appNodeModulesRoot);
 
-const oldRequire = require;
+const scramOldRequire = require;
 global.require = function(name) {
-    const modifiedName = (name) => {
-        if (name.startsWith('.')) {
-            const modifiedName = path.resolve(__dirname, '../../', filename.split('/').slice(0, -1).join('/'), name);
-            return modifiedName;
-        }
-
-        return name;
-    };
-
-    return oldRequire(modifiedName(name));
+    return scramOldRequire(modifiedName(name));
 };
+
+function modifiedName(name) {
+    if (name.startsWith('.')) {
+        const modifiedName = scramPathModule.resolve(__dirname, '../../', filename.split('/').slice(0, -1).join('/'), name);
+        return modifiedName;
+    }
+
+    return name;
+}
