@@ -2,41 +2,20 @@
 
 const path = require('path');
 
-const getIndexURL = (loadFromFile, filename, localPort) => {
 
-    const createFileURL = (filename) => {
-        const resolvePath = path.resolve(__dirname, '../../');
-        return `file://${resolvePath}/${filename}`;
-    };
+const argOptions = process.argv.slice(3);
+const filename = process.argv[2];
+const devMode = argOptions.includes('-d');
+const loadFromFile = argOptions.includes('-f');
+const localPort = argOptions.includes('-p') ? argOptions[argOptions.indexOf('-p') + 1] : '5050';
 
-    const createServerURL = (filename, localPort) => {
-        const protocol = 'http';
-        const domain = 'localhost';
-        const port = `:${localPort}/`;
+if (!loadFromFile) {
+    startLocalServer(localPort);
+}
 
-        return `${protocol}://${domain}${port}${filename}`;
-    };
+launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
 
-    if (loadFromFile) {
-        return createFileURL(filename);
-    }
-    else {
-        return createServerURL(filename, localPort);
-    }
-};
-
-const startLocalServer = (localPort) => {
-    require('child_process').exec(`node_modules/.bin/http-server -p ${localPort}`, (err, stdout, stderr) => {
-        if (!err) {
-            console.log(stdout);
-        }
-        else {
-            console.log(stderr);
-        }
-    });
-};
-
-const launchApp = (indexURL, filename, devMode, loadFromFile) => {
+function launchApp(indexURL, filename, devMode, loadFromFile) {
     const electron = require('electron');
     const app = electron.app;
     const BrowserWindow = electron.BrowserWindow;
@@ -47,15 +26,6 @@ const launchApp = (indexURL, filename, devMode, loadFromFile) => {
     let mainWindow = null;
 
     app.on('ready', () => {
-
-        const getPreload = (loadFromFile) => {
-            if (!loadFromFile) {
-                return path.resolve(__dirname, `index-config.js`);
-            }
-            else {
-                return '';
-            }
-        };
 
         mainWindow = new BrowserWindow({
             show: devMode,
@@ -77,21 +47,48 @@ const launchApp = (indexURL, filename, devMode, loadFromFile) => {
         if (devMode) {
             mainWindow.webContents.openDevTools();
         }
+
+        function getPreload(loadFromFile) {
+            if (!loadFromFile) {
+                return path.resolve(__dirname, `index-config.js`);
+            }
+            else {
+                return '';
+            }
+        }
     });
-};
+}
 
-const init = () => {
-    const argOptions = process.argv.slice(3);
-    const filename = process.argv[2];
-    const devMode = argOptions.includes('-d');
-    const loadFromFile = argOptions.includes('-f');
-    const localPort = argOptions.includes('-p') ? argOptions[argOptions.indexOf('-p') + 1] : '5050';
+function getIndexURL(loadFromFile, filename, localPort) {
 
-    if (!loadFromFile) {
-        startLocalServer(localPort);
+    if (loadFromFile) {
+        return createFileURL(filename);
+    }
+    else {
+        return createServerURL(filename, localPort);
     }
 
-    launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
-};
+    function createFileURL(filename) {
+        const resolvePath = path.resolve(__dirname, '../../');
+        return `file://${resolvePath}/${filename}`;
+    }
 
-init();
+    function createServerURL(filename, localPort) {
+        const protocol = 'http';
+        const domain = 'localhost';
+        const port = `:${localPort}/`;
+
+        return `${protocol}://${domain}${port}${filename}`;
+    }
+}
+
+function startLocalServer(localPort) {
+    require('child_process').exec(`node_modules/.bin/http-server -p ${localPort}`, (err, stdout, stderr) => {
+        if (!err) {
+            console.log(stdout);
+        }
+        else {
+            console.log(stderr);
+        }
+    });
+}
