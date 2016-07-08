@@ -124,7 +124,9 @@ The `-f` option will allow you to load your starting `html` file from the filesy
 Any relative requires should be done relative to the starting `html` file when requiring from within an imported web component. When requiring from within a required module, relative requires should be done relative to the module (normal require behavior).
 
 ##### `__dirname` and `__filename`
-`__dirname` and `__filename` are set relative to the starting `html` file, and should be the same across all components imported throughout your application. `__dirname` and `__filename` inside of required modules act as expected.
+`__dirname` and `__filename` are set relative to the starting `html` file, and should be the same across all components imported throughout your application. `__dirname` referenced directly from a web component script will be set to the absolute path of the directory that your starting `html` file resides in. `__filename` referenced directly from a web component script will be set to the absolute path of the starting `html` file, including that file's name.
+
+`__dirname` and `__filename` inside of required modules act as expected.
 
 When loading the starting `html` file from the local server, you must include the `filesystem-config.js` file before referencing `__dirname` or `__filename` in any imported web components:
 
