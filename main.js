@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
+const electron = require('electron');
 const path = require('path');
-
 
 const argOptions = process.argv.slice(3);
 const filename = process.argv[2];
@@ -16,7 +16,6 @@ if (!loadFromFile) {
 launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
 
 function launchApp(indexURL, filename, devMode, loadFromFile) {
-    const electron = require('electron');
     const app = electron.app;
     const BrowserWindow = electron.BrowserWindow;
     const ipcMain = electron.ipcMain;
