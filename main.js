@@ -20,8 +20,6 @@ function launchApp(indexURL, filename, devMode, loadFromFile) {
     const BrowserWindow = electron.BrowserWindow;
     const ipcMain = electron.ipcMain;
 
-    app.commandLine.appendSwitch('--disable-http-cache');
-
     let mainWindow = null;
 
     app.on('ready', () => {
@@ -41,7 +39,10 @@ function launchApp(indexURL, filename, devMode, loadFromFile) {
         //     return console.log;
         // };
 
-        mainWindow.loadURL(indexURL);
+        const options = {
+            extraHeaders: 'pragma: no-cache\n'
+        };
+        mainWindow.loadURL(indexURL, options);
 
         if (devMode) {
             mainWindow.webContents.openDevTools();
