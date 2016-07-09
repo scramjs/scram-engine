@@ -35,10 +35,6 @@ function launchApp(indexURL, filename, devMode, loadFromFile) {
             return filename;
         };
 
-        // mainWindow.getConsoleLog = () => {
-        //     return console.log;
-        // };
-
         const options = {
             extraHeaders: 'pragma: no-cache\n'
         };
