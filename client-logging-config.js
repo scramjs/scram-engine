@@ -7,3 +7,6 @@
 //     //rendererProcessConsoleLog('hello');
 //     //mainProcessConsoleLog('hello');
 // };
+
+const scramRedirectModule = require('console-redirect');
+redirect(process.stdout, process.stderr);
