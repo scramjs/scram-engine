@@ -9,4 +9,4 @@
 // };
 
 const scramRedirectModule = require('console-redirect');
-redirect(process.stdout, process.stderr);
+scramRedirectModule(process.stdout, process.stderr);
