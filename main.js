@@ -79,12 +79,9 @@ function getIndexURL(loadFromFile, filename, localPort) {
 }
 
 function startLocalServer(localPort) {
-    require('child_process').exec(`node_modules/.bin/http-server -p ${localPort}`, (err, stdout, stderr) => {
-        if (!err) {
-            console.log(stdout);
-        }
-        else {
-            console.log(stderr);
-        }
-    });
+    const express = require('express');
+    const app = express();
+
+    app.use(express.static(path.resolve(__dirname, '../..')));
+    app.listen(localPort);
 }
