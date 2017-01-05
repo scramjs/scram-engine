@@ -23,7 +23,6 @@ const serveDir = program.serveDir;
 launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile, serveDir);
 
 function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
-    console.log('launching app');
     const app = electron.app;
     const BrowserWindow = electron.BrowserWindow;
     const ipcMain = electron.ipcMain;
@@ -34,15 +33,13 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
 
         if (!loadFromFile) {
             startLocalServer(localPort, filename, serveDir).then(() => {
-                console.log("app ready")
+
                 mainWindow = new BrowserWindow({
                     show: devMode,
                     webPreferences: {
                         preload: getPreload(loadFromFile)
                     }
                 });
-
-                console.log('main window created');
 
                 mainWindow.getFilename = () => {
                     return filename;
@@ -51,7 +48,9 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
                 const options = {
                     extraHeaders: 'pragma: no-cache\n'
                 };
-                console.log(indexURL)
+
+                console.log('indexURL', indexURL);
+
                 mainWindow.loadURL(indexURL, options);
 
                 if (devMode) {
@@ -97,6 +96,7 @@ function getIndexURL(loadFromFile, filename, localPort) {
 }
 
 function startLocalServer(localPort, filename, serveDir) {
+    console.log('serveDir', serveDir);
     return new Promise((resolve, reject) => {
         const child = spawn(`${path.resolve(__dirname, '../')}/.bin/zwitterion`, [
             '--serve-dir', serveDir,
