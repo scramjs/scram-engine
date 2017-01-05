@@ -2,6 +2,7 @@
 
 const electron = require('electron');
 const path = require('path');
+const spawn = require('child_process').spawn;
 
 const argOptions = process.argv.slice(3);
 const filename = process.argv[2];
@@ -10,10 +11,15 @@ const loadFromFile = argOptions.includes('-f');
 const localPort = argOptions.includes('-p') ? argOptions[argOptions.indexOf('-p') + 1] : '5050';
 
 if (!loadFromFile) {
-    startLocalServer(localPort);
+    startLocalServer(localPort).then(() => {
+        launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
+    }, (error) => {
+        console.log(error);
+    });
 }
-
-launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
+else {
+    launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
+}
 
 function launchApp(indexURL, filename, devMode, loadFromFile) {
     const app = electron.app;
@@ -79,9 +85,22 @@ function getIndexURL(loadFromFile, filename, localPort) {
 }
 
 function startLocalServer(localPort) {
-    const express = require('express');
-    const app = express();
+    return new Promise((resolve, reject) => {
+        const child = spawn(`node_modules/.bin/zwitterion`, [
+            '--serve-dir', path.resolve(__dirname, '../..'),
+            '--port', '5050',
+            '--http',
+            '--write-files-off'
+        ]);
 
-    app.use(express.static(path.resolve(__dirname, '../..')));
-    app.listen(localPort);
+        child.stdout.on('data', (chunk) => {
+            if (chunk.toString().includes('zwitterion server listening on port')) {
+                resolve();
+            }
+        });
+
+        child.stderr.on('data', (chunk) => {
+            console.log(chunk.toString());
+        });
+    });
 }

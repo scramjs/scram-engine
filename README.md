@@ -15,10 +15,9 @@ Here are some example Express.js apps that have been rewritten with web componen
 * https://github.com/scramjs/node-tutorial-for-frontend-devs
 
 ## Development Installation
-Scram.js leverages Electron to provide a runtime for server-side web components. The only dependency is Electron and Node.js, and you are free to install any compatible version: 
+Scram.js leverages Electron to provide a runtime for server-side web components:
 
 ```
-npm install --save electron-prebuilt
 npm install --save scram-engine
 ```
 
@@ -27,7 +26,7 @@ There are a few more considerations in a production environment. Since Electron 
 
 On Ubuntu: `sudo apt-get install xvfb`
 
-Electron might require one or more of the following libraries to be installed on certain Ubuntu systems: 
+Electron might require one or more of the following libraries to be installed on certain Ubuntu systems:
 
 ```
 libgtk2.0-0
