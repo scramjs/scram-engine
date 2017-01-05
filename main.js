@@ -102,7 +102,8 @@ function startLocalServer(localPort, filename, serveDir) {
             '--serve-dir', serveDir,
             '--port', localPort,
             '--http',
-            '--write-files-off'
+            '--write-files-off',
+            '--not-found-redirect', filename
         ]);
 
         child.stdout.on('data', (chunk) => {
