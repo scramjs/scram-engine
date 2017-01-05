@@ -10,53 +10,69 @@ const devMode = argOptions.includes('-d');
 const loadFromFile = argOptions.includes('-f');
 const localPort = argOptions.includes('-p') ? argOptions[argOptions.indexOf('-p') + 1] : '5050';
 
-if (!loadFromFile) {
-    startLocalServer(localPort).then(() => {
-        launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
-    }, (error) => {
-        console.log(error);
-    });
-}
-else {
-    launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
-}
+// if (!loadFromFile) {
+//     startLocalServer(localPort).then(() => {
+//         console.log("launch app")
+//         launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
+//     }, (error) => {
+//         console.log(error);
+//     });
+// }
+// else {
+//     launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
+// }
+
+launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
 
 function launchApp(indexURL, filename, devMode, loadFromFile) {
+    console.log('launching app');
     const app = electron.app;
     const BrowserWindow = electron.BrowserWindow;
     const ipcMain = electron.ipcMain;
 
     let mainWindow = null;
 
+    console.log("waiting for app to be ready")
+
     app.on('ready', () => {
 
-        mainWindow = new BrowserWindow({
-            show: devMode,
-            webPreferences: {
-                preload: getPreload(loadFromFile)
-            }
-        });
+        if (!loadFromFile) {
+            startLocalServer(localPort).then(() => {
+                console.log("app ready")
+                mainWindow = new BrowserWindow({
+                    show: devMode,
+                    webPreferences: {
+                        preload: getPreload(loadFromFile)
+                    }
+                });
 
-        mainWindow.getFilename = () => {
-            return filename;
-        };
+                console.log('main window created');
 
-        const options = {
-            extraHeaders: 'pragma: no-cache\n'
-        };
-        mainWindow.loadURL(indexURL, options);
+                mainWindow.getFilename = () => {
+                    return filename;
+                };
 
-        if (devMode) {
-            mainWindow.webContents.openDevTools();
-        }
+                const options = {
+                    extraHeaders: 'pragma: no-cache\n'
+                };
+                console.log(indexURL)
+                mainWindow.loadURL(indexURL, options);
 
-        function getPreload(loadFromFile) {
-            if (!loadFromFile) {
-                return path.resolve(__dirname, `index-config.js`);
-            }
-            else {
-                return '';
-            }
+                if (devMode) {
+                    mainWindow.webContents.openDevTools();
+                }
+
+                function getPreload(loadFromFile) {
+                    if (!loadFromFile) {
+                        return path.resolve(__dirname, `index-config.js`);
+                    }
+                    else {
+                        return '';
+                    }
+                }
+            }, (error) => {
+                console.log(error);
+            });
         }
     });
 }
@@ -86,9 +102,11 @@ function getIndexURL(loadFromFile, filename, localPort) {
 
 function startLocalServer(localPort) {
     return new Promise((resolve, reject) => {
-        const child = spawn(`node_modules/.bin/zwitterion`, [
-            '--serve-dir', path.resolve(__dirname, '../..'),
-            '--port', '5050',
+        console.log(path.resolve(__dirname, '../..'))
+
+        const child = spawn(`${path.resolve(__dirname, '../')}/.bin/zwitterion`, [
+            '--serve-dir', path.resolve(__dirname, '../..').split('/').slice(-1)[0],
+            '--port', localPort,
             '--http',
             '--write-files-off'
         ]);
