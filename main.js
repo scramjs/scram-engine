@@ -3,28 +3,26 @@
 const electron = require('electron');
 const path = require('path');
 const spawn = require('child_process').spawn;
+const program = require('commander');
 
-const argOptions = process.argv.slice(3);
-const filename = process.argv[2];
-const devMode = argOptions.includes('-d');
-const loadFromFile = argOptions.includes('-f');
-const localPort = argOptions.includes('-p') ? argOptions[argOptions.indexOf('-p') + 1] : '5050';
+program
+    .version('0.4.0')
+    .option('-e, --entry-file [entryFile]', 'The file to load into Electron')
+    .option('-d, --serve-dir [serveDir]', 'The directory to serve local application files from')
+    .option('-w, --window', 'Open an Electron window')
+    .option('-f, --file-system', 'Serve local application files through the file system protocol')
+    .option('-p, --port', 'The port for the local application file server')
+    .parse(process.argv);
 
-// if (!loadFromFile) {
-//     startLocalServer(localPort).then(() => {
-//         console.log("launch app")
-//         launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
-//     }, (error) => {
-//         console.log(error);
-//     });
-// }
-// else {
-//     launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
-// }
+const filename = program.entryFile;
+const devMode = program.window;
+const loadFromFile = program.fileSystem;
+const localPort = program.port;
+const serveDir = program.serveDir;
 
-launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile);
+launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile, serveDir);
 
-function launchApp(indexURL, filename, devMode, loadFromFile) {
+function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
     console.log('launching app');
     const app = electron.app;
     const BrowserWindow = electron.BrowserWindow;
@@ -32,12 +30,10 @@ function launchApp(indexURL, filename, devMode, loadFromFile) {
 
     let mainWindow = null;
 
-    console.log("waiting for app to be ready")
-
     app.on('ready', () => {
 
         if (!loadFromFile) {
-            startLocalServer(localPort).then(() => {
+            startLocalServer(localPort, filename, serveDir).then(() => {
                 console.log("app ready")
                 mainWindow = new BrowserWindow({
                     show: devMode,
@@ -100,12 +96,10 @@ function getIndexURL(loadFromFile, filename, localPort) {
     }
 }
 
-function startLocalServer(localPort) {
+function startLocalServer(localPort, filename, serveDir) {
     return new Promise((resolve, reject) => {
-        console.log(path.resolve(__dirname, '../..'))
-
         const child = spawn(`${path.resolve(__dirname, '../')}/.bin/zwitterion`, [
-            '--serve-dir', path.resolve(__dirname, '../..').split('/').slice(-1)[0],
+            '--serve-dir', serveDir,
             '--port', localPort,
             '--http',
             '--write-files-off'
