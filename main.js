@@ -17,7 +17,7 @@ program
 const filename = program.entryFile;
 const devMode = program.window;
 const loadFromFile = program.fileSystem;
-const localPort = program.port;
+const localPort = program.port || 5050;
 const serveDir = program.serveDir;
 
 launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile, serveDir);
