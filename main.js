@@ -18,7 +18,7 @@ const filename = program.entryFile;
 const devMode = program.window;
 const loadFromFile = program.fileSystem;
 const localPort = program.port || 5050;
-const serveDir = program.serveDir;
+const serveDir = program.serveDir || '';
 
 launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile, serveDir);
 
@@ -99,7 +99,7 @@ function startLocalServer(localPort, filename, serveDir) {
     console.log('serveDir', serveDir);
     return new Promise((resolve, reject) => {
         const child = spawn(`${path.resolve(__dirname, '../')}/.bin/zwitterion`, [
-            '--serve-dir', serveDir,
+            serveDir ? '--serve-dir' : '', serveDir,
             '--port', localPort,
             '--http',
             '--write-files-off',
