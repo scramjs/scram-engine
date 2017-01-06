@@ -49,8 +49,6 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
                     extraHeaders: 'pragma: no-cache\n'
                 };
 
-                console.log('indexURL', indexURL);
-
                 mainWindow.loadURL(indexURL, options);
 
                 if (devMode) {
@@ -96,7 +94,6 @@ function getIndexURL(loadFromFile, filename, localPort) {
 }
 
 function startLocalServer(localPort, filename, serveDir) {
-    console.log('serveDir', serveDir);
     return new Promise((resolve, reject) => {
         const child = spawn(`${path.resolve(__dirname, '../')}/.bin/zwitterion`, [
             serveDir ? '--serve-dir' : '', serveDir,
