@@ -6,7 +6,7 @@ const spawn = require('child_process').spawn;
 const program = require('commander');
 
 program
-    .version('0.4.2')
+    .version('0.4.3')
     .option('-e, --entry-file [entryFile]', 'The file to load into Electron')
     .option('-d, --serve-dir [serveDir]', 'The directory to serve local application files from')
     .option('-w, --window', 'Open an Electron window')
@@ -20,7 +20,8 @@ const loadFromFile = program.fileSystem;
 const localPort = program.port || 5050;
 const serveDir = program.serveDir || '';
 
-launchApp(getIndexURL(loadFromFile, filename, localPort), filename, devMode, loadFromFile, serveDir);
+const indexURL = getIndexURL(loadFromFile, filename, localPort);
+launchApp(indexURL, filename, devMode, loadFromFile, serveDir);
 
 function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
     const app = electron.app;
@@ -33,18 +34,18 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
 
         if (!loadFromFile) {
             startLocalServer(localPort, filename, serveDir).then(() => {
-                launchWindow(mainWindow, devMode, loadFromFile);
+                launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL);
             }, (error) => {
                 console.log(error);
             });
         }
         else {
-            launchWindow();
+            launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL);
         }
     });
 }
 
-function launchWindow(mainWindow, devMode, loadFromFile) {
+function launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL) {
     mainWindow = new BrowserWindow({
         show: devMode,
         webPreferences: {
