@@ -33,41 +33,47 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
 
         if (!loadFromFile) {
             startLocalServer(localPort, filename, serveDir).then(() => {
-
-                mainWindow = new BrowserWindow({
-                    show: devMode,
-                    webPreferences: {
-                        preload: getPreload(loadFromFile)
-                    }
-                });
-
-                mainWindow.getFilename = () => {
-                    return filename;
-                };
-
-                const options = {
-                    extraHeaders: 'pragma: no-cache\n'
-                };
-
-                mainWindow.loadURL(indexURL, options);
-
-                if (devMode) {
-                    mainWindow.webContents.openDevTools();
-                }
-
-                function getPreload(loadFromFile) {
-                    if (!loadFromFile) {
-                        return path.resolve(__dirname, `index-config.js`);
-                    }
-                    else {
-                        return '';
-                    }
-                }
+                launchWindow(mainWindow, devMode, loadFromFile);
             }, (error) => {
                 console.log(error);
             });
         }
+        else {
+            launchWindow();
+        }
     });
+}
+
+function launchWindow(mainWindow, devMode, loadFromFile) {
+    mainWindow = new BrowserWindow({
+        show: devMode,
+        webPreferences: {
+            preload: getPreload(loadFromFile)
+        }
+    });
+
+    mainWindow.getFilename = () => {
+        return filename;
+    };
+
+    const options = {
+        extraHeaders: 'pragma: no-cache\n'
+    };
+
+    mainWindow.loadURL(indexURL, options);
+
+    if (devMode) {
+        mainWindow.webContents.openDevTools();
+    }
+}
+
+function getPreload(loadFromFile) {
+    if (!loadFromFile) {
+        return path.resolve(__dirname, `index-config.js`);
+    }
+    else {
+        return '';
+    }
 }
 
 function getIndexURL(loadFromFile, filename, localPort) {
@@ -78,19 +84,19 @@ function getIndexURL(loadFromFile, filename, localPort) {
     else {
         return createServerURL(filename, localPort);
     }
+}
 
-    function createFileURL(filename) {
-        const resolvePath = path.resolve(__dirname, '../../');
-        return `file://${resolvePath}/${filename}`;
-    }
+function createFileURL(filename) {
+    const resolvePath = path.resolve(__dirname, '../../');
+    return `file://${resolvePath}/${filename}`;
+}
 
-    function createServerURL(filename, localPort) {
-        const protocol = 'http';
-        const domain = 'localhost';
-        const port = `:${localPort}/`;
+function createServerURL(filename, localPort) {
+    const protocol = 'http';
+    const domain = 'localhost';
+    const port = `:${localPort}/`;
 
-        return `${protocol}://${domain}${port}${filename}`;
-    }
+    return `${protocol}://${domain}${port}${filename}`;
 }
 
 function startLocalServer(localPort, filename, serveDir) {
