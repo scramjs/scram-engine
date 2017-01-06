@@ -1,6 +1,6 @@
 {
   "name": "scram-engine",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Provides access to markup rendering in Node.js. Write your server semantically and declaratively with web components.",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "console-redirect": "^1.0.0",
     "electron": "^1.4.13",
     "express": "^4.14.0",
-    "zwitterion": "^0.6.1"
+    "zwitterion": "^0.7.0"
   },
   "license": "MIT",
   "keywords": [
