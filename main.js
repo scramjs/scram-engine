@@ -6,7 +6,7 @@ const spawn = require('child_process').spawn;
 const program = require('commander');
 
 program
-    .version('0.4.1')
+    .version('0.4.2')
     .option('-e, --entry-file [entryFile]', 'The file to load into Electron')
     .option('-d, --serve-dir [serveDir]', 'The directory to serve local application files from')
     .option('-w, --window', 'Open an Electron window')
