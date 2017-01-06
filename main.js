@@ -15,7 +15,7 @@ program
     .parse(process.argv);
 
 const filename = program.entryFile;
-const devMode = program.window;
+const devMode = program.window || false;
 const loadFromFile = program.fileSystem;
 const localPort = program.port || 5050;
 const serveDir = program.serveDir || '';
