@@ -1,3 +1,5 @@
+DOCUMENTATION BELOW IS FOR v0.3.x and lower, still working on new documentation for v0.4.x
+
 # What is this?
 Scram.js offers a simple way to use Electron as a server, allowing you to use HTML, Web APIs, and virtually any other client-side tool to write server-side applications. The recommended way to write these server-side applications is to use web components. If you have not heard of web components, then please [start learning today](http://webcomponents.org/). Web components offer a way to modularize and package functionality into reusable components that can be easily shared and composed to create entire applications. Currently they are used mostly for front-end web development. Well, what about the back-end? Web components are not only useful for visual components, as the Google Polymer project [has shown us](https://elements.polymer-project.org/elements/iron-ajax). Now you can build APIs and other server-side applications, leveraging the same declarativeness of the front-end world. We are one step closer to true Universal JavaScript.
 
