@@ -1,14 +1,17 @@
-Documentation below is for v0.3.x and lower, still working on new documentation for v0.4.x
-
 # What is this?
-Scram.js offers a simple way to use Electron as a server, allowing you to use HTML, Web APIs, and virtually any other client-side tool to write server-side applications. The recommended way to write these server-side applications is to use web components. If you have not heard of web components, then please [start learning today](http://webcomponents.org/). Web components offer a way to modularize and package functionality into reusable components that can be easily shared and composed to create entire applications. Currently they are used mostly for front-end web development. Well, what about the back-end? Web components are not only useful for visual components, as the Google Polymer project [has shown us](https://elements.polymer-project.org/elements/iron-ajax). Now you can build APIs and other server-side applications, leveraging the same declarativeness of the front-end world. We are one step closer to true Universal JavaScript.
+Scram.js offers a simple way to use Electron as a platform for universal web components, allowing you to use HTML, Web APIs, and virtually any other client-side tool to write server-side and even embedded applications. If you have not heard of web components, then please [start learning today](http://webcomponents.org/). Web components offer a way to manage complexity and expose it simply, by allowing you to create reusable components that can be easily shared and composed to create entire applications. Currently they are used mostly for front-end web development. What about non-visual applications? Web components are not only useful for visual components, but offer many benefits for building all kinds of user interface applications. We are one step closer to true Universal JavaScript.
 
 ## Server-side Web Components
 This repo only offers access to the runtime necessary to use server-side web components. To actually begin building applications, you'll need components to work with:
 
 * Express Web Components: https://github.com/scramjs/express-web-components
 
+## Embedded Web Components
+
+* JFive Web Components: https://github.com/scramjs/jfive-web-components
+
 ## Examples
+
 Here are some example Express.js apps that have been rewritten with web components:
 * https://github.com/scramjs/rest-api-express
 * https://github.com/scramjs/node-api
@@ -16,14 +19,20 @@ Here are some example Express.js apps that have been rewritten with web componen
 * https://github.com/scramjs/node-tutorial-2-restful-app
 * https://github.com/scramjs/node-tutorial-for-frontend-devs
 
+Here are some example hardware apps that have been written with web components:
+
+* https://github.com/scramjs/web-copter
+
 ## Development Installation
-Scram.js leverages Electron to provide a runtime for server-side web components:
+
+Scram.js leverages Electron to provide a runtime for universal web components:
 
 ```
 npm install --save scram-engine
 ```
 
 ## Production Installation
+
 There are a few more considerations in a production environment. Since Electron needs a graphical environment for rendering on headless Linux® machines, you may need to install Xvfb to provide a display server.
 
 On Ubuntu: `sudo apt-get install xvfb`
@@ -38,7 +47,8 @@ libxss1
 ```
 
 ### Dokku
-Scram.js works well with [Dokku](http://dokku.viewdocs.io/dokku/). Dokku provides a personal PaaS, making it easy to deploy to a production environment.
+
+Scram.js works well with [Dokku](http://dokku.viewdocs.io/dokku/). Dokku provides a personal PaaS, making it easy to deploy to a production server environment.
 * Follow the [official documentation](http://dokku.viewdocs.io/dokku/installation/) to install Dokku
 * Install this [Dokku plugin](https://github.com/F4-Group/dokku-apt) to allow Dokku to automatically install Xvfb and other packages your application might need
 * Add a file to the root directory of your app called `apt-packages`
@@ -49,10 +59,12 @@ Scram.js works well with [Dokku](http://dokku.viewdocs.io/dokku/). Dokku provide
 * For a full working example of an application deployed with Dokku, see the [Dokku Example](https://github.com/scramjs/dokku-example)
 
 ## Usage
+
 ### Development
+
 Provide Electron with the main.js script from this repo and then the path to your starting `html` file from the root directory of your app:
 
-`node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
+`node_modules/.bin/electron node_modules/scram-engine/main.js --entry-file index.html`
 
 It might be convenient to create a script in your package.json:
 
@@ -61,14 +73,14 @@ It might be convenient to create a script in your package.json:
   "name": "awesome-repo",
   "version": "2.4.2",
   "scripts": {
-    "start": "electron node_modules/scram-engine/main.js index.html"
+    "start": "electron node_modules/scram-engine/main.js --entry-file index.html"
   }
 }
 ```
 
-To open up an Electron window for access to the dev tools, add the `-d` option:
+To open up an Electron window for access to the dev tools, add the `--window` or `-w` option:
 
-`node_modules/.bin/electron node_modules/scram-engine/main.js index.html -d`
+`node_modules/.bin/electron node_modules/scram-engine/main.js --entry-file index.html --window`
 
 or
 
@@ -77,19 +89,16 @@ or
   "name": "awesome-repo",
   "version": "2.4.2",
   "scripts": {
-    "start": "electron node_modules/scram-engine/main.js index.html -d"
+    "start": "electron node_modules/scram-engine/main.js --entry-file index.html --window"
   }
 }
 ```
 
 ### Production
+
 You need to add the xvfb-run command in front of all other commands on headless Linux machines:
 
-`xvfb-run node_modules/.bin/electron node_modules/scram-engine/main.js index.html`
-
-If you are using bower to install the Polymer library and other web components (you probably are), you need your development server's build process to install the bower components when deploying:
-
-`npm install -g bower && bower install`
+`xvfb-run node_modules/.bin/electron node_modules/scram-engine/main.js --entry-file index.html`
 
 It might be convenient to create a script in your package.json:
 
@@ -98,9 +107,9 @@ It might be convenient to create a script in your package.json:
   "name": "awesome-repo",
   "version": "2.4.2",
   "scripts": {
-    "start": "npm install -g bower && bower install && xvfb-run electron node_modules/scram-engine/main.js index.html",
-    "dev": "electron node_modules/scram-engine/main.js index.html",
-    "dev-window": "electron node_modules/scram-engine/main.js index.html -d"
+    "start": "xvfb-run electron node_modules/scram-engine/main.js --entry-file index.html",
+    "dev": "electron node_modules/scram-engine/main.js --entry-file index.html",
+    "dev-window": "electron node_modules/scram-engine/main.js --entry-file index.html --window"
   },
   "engines": {
     "node": "6.0.0"
@@ -140,9 +149,10 @@ Do not include this file when loading the starting `html` file from the filesyst
 ### Options
 There are various options available when loading your application:
 
-* `-d`: Open a browser window for debugging
-* `-f`: Load the starting `html` file from the filesystem
-* `-p`: Specify the port the local server uses to load the starting `html` file
+* `--entry-file`: The HTML file to load into Electron
+* `--window` or `-w`: Open a browser window for debugging
+* `--file-system` or `-f`: Load the starting `html` file from the filesystem
+* `--port` or `-p`: Specify the port the local server uses to load the starting `html` file
 
 ## Compatibility and Testing
 Only manually tested at the moment. PR with tests if you'd like :)
