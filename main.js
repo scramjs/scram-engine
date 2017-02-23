@@ -49,7 +49,8 @@ function launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL
     mainWindow = new BrowserWindow({
         show: devMode,
         webPreferences: {
-            preload: getPreload(loadFromFile)
+            preload: getPreload(loadFromFile),
+            webSecurity: false
         }
     });
 
