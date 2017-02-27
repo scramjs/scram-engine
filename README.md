@@ -1,8 +1,9 @@
 # What is this?
 Scram.js offers a simple way to use Electron as a platform for universal web components, allowing you to use HTML, Web APIs, and virtually any other client-side tool to write server-side and even embedded applications. If you have not heard of web components, then please [start learning today](http://webcomponents.org/). Web components offer a way to manage complexity and expose it simply, by allowing you to create reusable components that can be easily shared and composed to create entire applications. Currently they are used mostly for front-end web development. What about non-visual applications? Web components are not only useful for visual components, but offer many benefits for building all kinds of user interface applications. We are one step closer to true Universal JavaScript.
 
-## Server-side Web Components
 This repo only offers access to the runtime necessary to use server-side web components. To actually begin building applications, you'll need components to work with:
+
+## Server-side Web Components
 
 * Express Web Components: https://github.com/scramjs/express-web-components
 
@@ -25,8 +26,6 @@ Here are some example hardware apps that have been written with web components:
 
 ## Development Installation
 
-Scram.js leverages Electron to provide a runtime for universal web components:
-
 ```
 npm install --save scram-engine
 ```
@@ -37,13 +36,20 @@ There are a few more considerations in a production environment. Since Electron 
 
 On Ubuntu: `sudo apt-get install xvfb`
 
-Electron might require one or more of the following libraries to be installed on certain Ubuntu systems:
+The Electron dependency might require one or more of the following libraries to be installed on certain Ubuntu systems:
 
 ```
 libgtk2.0-0
 libnotify-bin
 Libgconf-2-4
 libxss1
+```
+
+The NGINX dependency might require one or more of the following libraries to be installed:
+
+```
+libpcre3
+libpcre3-dev
 ```
 
 ### Dokku
