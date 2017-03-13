@@ -11,7 +11,7 @@ program
     .option('-d, --serve-dir [serveDir]', 'The directory to serve local application files from')
     .option('-w, --window', 'Open an Electron window')
     .option('-f, --file-system', 'Serve local application files through the file system protocol')
-    .option('-p, --port', 'The port for the local application file server')
+    .option('-p, --port [port]', 'The port for the local application file server')
     .parse(process.argv);
 
 const filename = program.entryFile;
