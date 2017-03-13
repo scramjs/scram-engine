@@ -16,7 +16,7 @@
     "console-redirect": "^1.0.0",
     "electron": "^1.4.13",
     "express": "^4.14.0",
-    "zwitterion": "^0.7.0"
+    "zwitterion-production": "0.0.5"
   },
   "license": "MIT",
   "keywords": [

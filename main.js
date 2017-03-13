@@ -103,16 +103,12 @@ function createServerURL(filename, localPort) {
 
 function startLocalServer(localPort, filename, serveDir) {
     return new Promise((resolve, reject) => {
-        const child = spawn(`${path.resolve(__dirname, '../')}/.bin/zwitterion`, [
-            serveDir ? '--serve-dir' : '', serveDir,
-            '--port', localPort,
-            '--http',
-            '--write-files-off',
-            '--not-found-redirect', filename
+        const child = spawn(`${path.resolve(__dirname, '../')}/.bin/zwitterion-production`, [
+            '--port', localPort
         ]);
 
         child.stdout.on('data', (chunk) => {
-            if (chunk.toString().includes('zwitterion server listening on port')) {
+            if (chunk.toString().includes('NGINX listening on port')) {
                 resolve();
             }
         });
