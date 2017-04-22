@@ -26,7 +26,7 @@ Here are some example hardware apps that have been written with web components:
 
 ## Development Installation
 
-```
+```bash
 npm install --save scram-engine
 ```
 
@@ -74,7 +74,7 @@ Provide Electron with the main.js script from this repo and then the path to you
 
 It might be convenient to create a script in your package.json:
 
-```
+```JSON
 {
   "name": "awesome-repo",
   "version": "2.4.2",
@@ -90,7 +90,7 @@ To open up an Electron window for access to the dev tools, add the `--window` or
 
 or
 
-```
+```JSON
 {
   "name": "awesome-repo",
   "version": "2.4.2",
@@ -108,7 +108,7 @@ You need to add the xvfb-run command in front of all other commands on headless 
 
 It might be convenient to create a script in your package.json:
 
-```
+```JSON
 {
   "name": "awesome-repo",
   "version": "2.4.2",
@@ -146,7 +146,7 @@ Any relative requires should be done relative to the starting `html` file when r
 
 When loading the starting `html` file from the local server, you must include the `filesystem-config.js` file before referencing `__dirname` or `__filename` in any imported web components:
 
-```
+```HTML
 <script src="node_modules/scram-engine/filesystem-config.js"></script>
 ```
 
