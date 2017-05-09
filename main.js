@@ -30,6 +30,7 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
 
     let mainWindow = null;
 
+    app.commandLine.appendSwitch('disable-http-cache');
     app.on('ready', () => {
 
         if (!loadFromFile) {
