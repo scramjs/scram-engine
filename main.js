@@ -51,7 +51,8 @@ function launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL
     mainWindow = new BrowserWindow({
         show: devMode,
         webPreferences: {
-            webSecurity: false
+            webSecurity: false,
+            experimentalFeatures: true //TODO remove this once CSS grid is enabled with Chrome 57, I did this to get CSS grid to work right now
         }
     });
 
