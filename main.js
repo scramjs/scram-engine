@@ -30,7 +30,8 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
 
     let mainWindow = null;
 
-    app.commandLine.appendSwitch('disable-http-cache');
+    app.setAppPath(path.resolve(__dirname, '../../')); // this does the magic of allowing require to work properly from an HTML file loaded over HTTP
+    app.commandLine.appendSwitch('disable-http-cache'); // there were some major issues with the cache not allowing changes to load properly on subsequent loads of the user's HTML app
     app.on('ready', () => {
 
         if (!loadFromFile) {
@@ -50,7 +51,6 @@ function launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL
     mainWindow = new BrowserWindow({
         show: devMode,
         webPreferences: {
-            preload: getPreload(loadFromFile),
             webSecurity: false
         }
     });
@@ -67,15 +67,6 @@ function launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL
 
     if (devMode) {
         mainWindow.webContents.openDevTools();
-    }
-}
-
-function getPreload(loadFromFile) {
-    if (!loadFromFile) {
-        return path.resolve(__dirname, `index-config.js`);
-    }
-    else {
-        return '';
     }
 }
 
