@@ -15,7 +15,7 @@
     "commander": "^2.9.0",
     "electron": "^1.6.8",
     "express": "^4.14.0",
-    "zwitterion-production": "0.0.7"
+    "zwitterion-production": "0.0.8"
   },
   "license": "MIT",
   "keywords": [
