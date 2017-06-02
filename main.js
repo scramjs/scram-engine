@@ -46,9 +46,13 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
             mainWindow = launchWindow(BrowserWindow, devMode, loadFromFile, indexURL);
         }
     });
-    ipcMain.on('kill-all-processes', (event) => {
+    ipcMain.on('kill-all-processes-successfully', (event) => {
         localServerProcess.kill();
         process.exit();
+    });
+    ipcMain.on('kill-all-processes-unsuccessfully', (event) => {
+        localServerProcess.kill();
+        process.exit(1);
     });
     ipcMain.on('get-console-arguments', (event, arg) => {
         event.returnValue = {
