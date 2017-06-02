@@ -4,9 +4,10 @@ const electron = require('electron');
 const path = require('path');
 const spawn = require('child_process').spawn;
 const program = require('commander');
+const {ipcMain} = require('electron');
 
 program
-    .version('0.4.5')
+    .version('0.6.0')
     .option('-e, --entry-file [entryFile]', 'The file to load into Electron')
     .option('-d, --serve-dir [serveDir]', 'The directory to serve local application files from')
     .option('-w, --window', 'Open an Electron window')
@@ -29,26 +30,28 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
     const ipcMain = electron.ipcMain;
 
     let mainWindow = null;
+    let localServerProcess = null;
 
     app.setAppPath(path.resolve(__dirname, '../../', filename)); // this does the magic of allowing require to work properly from an HTML file loaded over HTTP
     app.commandLine.appendSwitch('disable-http-cache'); // there were some major issues with the cache not allowing changes to load properly on subsequent loads of the user's HTML app
-    app.on('ready', () => {
+    app.on('ready', async () => {
 
         if (!loadFromFile) {
-            startLocalServer(localPort, filename, serveDir).then(() => {
-                launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL);
-            }, (error) => {
-                console.log(error);
-            });
+            localServerProcess = await startLocalServer(localPort, filename, serveDir);
+            mainWindow = launchWindow(BrowserWindow, devMode, loadFromFile, indexURL);
         }
         else {
-            launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL);
+            mainWindow = launchWindow(BrowserWindow, devMode, loadFromFile, indexURL);
         }
+    });
+    ipcMain.on('kill-all-processes', (event) => {
+        localServerProcess.kill();
+        process.exit();
     });
 }
 
-function launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL) {
-    mainWindow = new BrowserWindow({
+function launchWindow(BrowserWindow, devMode, loadFromFile, indexURL) {
+    let mainWindow = new BrowserWindow({
         show: devMode,
         webPreferences: {
             webSecurity: false,
@@ -69,6 +72,8 @@ function launchWindow(mainWindow, BrowserWindow, devMode, loadFromFile, indexURL
     if (devMode) {
         mainWindow.webContents.openDevTools();
     }
+
+    return mainWindow;
 }
 
 function getIndexURL(loadFromFile, filename, localPort) {
@@ -102,7 +107,7 @@ function startLocalServer(localPort, filename, serveDir) {
 
         child.stdout.on('data', (chunk) => {
             if (chunk.toString().includes('NGINX listening on port')) {
-                resolve();
+                resolve(child);
             }
         });
 

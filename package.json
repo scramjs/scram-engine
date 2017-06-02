@@ -1,6 +1,6 @@
 {
   "name": "scram-engine",
-  "version": "0.5.4",
+  "version": "0.6.0",
   "description": "Use web components outside of the browser for desktop, server, and embedded applications.",
   "repository": {
     "type": "git",
@@ -13,8 +13,7 @@
   "devDependencies": {},
   "dependencies": {
     "commander": "^2.9.0",
-    "electron": "^1.6.8",
-    "express": "^4.14.0",
+    "electron": "^1.6.10",
     "zwitterion-production": "0.0.8"
   },
   "license": "MIT",
