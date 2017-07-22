@@ -1,4 +1,8 @@
-# What is this?
+[![npm version](https://img.shields.io/npm/v/scram-engine.svg?style=flat)](https://www.npmjs.com/package/scram-engine) [![dependency Status](https://david-dm.org/scramjs/scram-engine/status.svg)](https://david-dm.org/scramjs/scram-engine) [![devDependency Status](https://david-dm.org/scramjs/scram-engine/dev-status.svg)](https://david-dm.org/scramjs/scram-engine?type=dev)
+
+# Scram.js
+
+# Introduction
 Scram.js offers a simple way to use Electron as a platform for universal web components, allowing you to use HTML, Web APIs, and virtually any other client-side tool to write server-side and even embedded applications. If you have not heard of web components, then please [start learning today](http://webcomponents.org/). Web components offer a way to manage complexity and expose it simply, by allowing you to create reusable components that can be easily shared and composed to create entire applications. Currently they are used mostly for front-end web development. What about non-visual applications? Web components are not only useful for visual components, but offer many benefits for building all kinds of user interface applications. We are one step closer to true Universal JavaScript.
 
 This repo only offers access to the runtime necessary to use server-side web components. To actually begin building applications, you'll need components to work with:
@@ -24,10 +28,16 @@ Here are some example hardware apps that have been written with web components:
 
 * https://github.com/scramjs/web-copter
 
+For more background information, see the following resources:
+* [Universal Web Components article](https://scotch.io/bar-talk/universal-web-components)
+* [Universal Web Components video presentation](https://www.youtube.com/watch?v=2eJkKJMSDCU&t=452s)
+* [Server-side Web Components article](https://scotch.io/tutorials/server-side-web-components-how-and-why)
+* [React Hardware article](http://iamdustan.com/2015/12/16/react-hardware/)
+
 ## Development Installation
 
 ```bash
-npm install --save scram-engine
+npm install scram-engine
 ```
 
 ## Production Installation
