@@ -7,7 +7,7 @@ const program = require('commander');
 const {ipcMain} = require('electron');
 
 program
-    .version('0.6.1')
+    .version('0.6.5')
     .option('-e, --entry-file [entryFile]', 'The file to load into Electron')
     .option('-d, --serve-dir [serveDir]', 'The directory to serve local application files from')
     .option('-w, --window', 'Open an Electron window')
@@ -125,7 +125,7 @@ function startLocalServer(localPort, filename, serveDir) {
         ]);
 
         child.stdout.on('data', (chunk) => {
-            if (chunk.toString().includes('NGINX listening on port')) {
+            if (chunk.toString().includes('Zwitterion listening on port')) {
                 resolve(child);
             }
         });
