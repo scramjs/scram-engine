@@ -7,7 +7,7 @@ const program = require('commander');
 const {ipcMain} = require('electron');
 
 program
-    .version('0.6.0')
+    .version('0.6.1')
     .option('-e, --entry-file [entryFile]', 'The file to load into Electron')
     .option('-d, --serve-dir [serveDir]', 'The directory to serve local application files from')
     .option('-w, --window', 'Open an Electron window')
@@ -118,8 +118,10 @@ function createServerURL(filename, localPort) {
 
 function startLocalServer(localPort, filename, serveDir) {
     return new Promise((resolve, reject) => {
-        const child = spawn('node_modules/.bin/zwitterion-production', [
-            '--port', localPort
+        const child = spawn('node_modules/.bin/zwitterion', [
+            '--port', localPort,
+            '--ts-warning',
+            '--watch-files'
         ]);
 
         child.stdout.on('data', (chunk) => {
