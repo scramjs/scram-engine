@@ -1,6 +1,6 @@
 {
   "name": "scram-engine",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Use web components outside of the browser for desktop, server, and embedded applications.",
   "repository": {
     "type": "git",
