@@ -121,7 +121,8 @@ function startLocalServer(localPort, filename, serveDir) {
         const child = spawn('node_modules/.bin/zwitterion', [
             '--port', localPort,
             '--ts-warning',
-            '--watch-files'
+            '--watch-files',
+            '--target ES2015'
         ]);
 
         child.stdout.on('data', (chunk) => {
