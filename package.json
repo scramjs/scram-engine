@@ -14,7 +14,7 @@
   "dependencies": {
     "commander": "^2.11.0",
     "electron": "^1.6.11",
-    "zwitterion": "^0.14.5"
+    "zwitterion": "^0.14.6"
   },
   "license": "MIT",
   "keywords": [
