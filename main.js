@@ -122,7 +122,8 @@ function startLocalServer(localPort, filename, serveDir) {
             '--port', localPort,
             '--ts-warning',
             '--watch-files',
-            '--target', 'ES2015'
+            '--target', 'ES2015',
+            '--disable-spa'
         ]);
 
         child.stdout.on('data', (chunk) => {
