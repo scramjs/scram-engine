@@ -120,7 +120,6 @@ function startLocalServer(localPort, filename, serveDir) {
     return new Promise((resolve, reject) => {
         const child = spawn('node_modules/.bin/zwitterion', [
             '--port', localPort,
-            '--ts-warning',
             '--watch-files',
             '--target', 'ES2015',
             '--disable-spa'
