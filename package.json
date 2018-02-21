@@ -12,9 +12,9 @@
   "homepage": "https://github.com/lastmjs/scram-engine#readme",
   "devDependencies": {},
   "dependencies": {
-    "commander": "^2.11.0",
-    "electron": "^1.7.5",
-    "zwitterion": "^0.16.1"
+    "commander": "^2.14.1",
+    "electron": "^1.8.2",
+    "zwitterion": "^0.17.4"
   },
   "license": "MIT",
   "keywords": [
