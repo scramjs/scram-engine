@@ -38,7 +38,6 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
     app.commandLine.appendSwitch('disable-http-cache'); // there were some major issues with the cache not allowing changes to load properly on subsequent loads of the user's HTML app
 
     if (!devMode) {
-        app.disableHardwareAcceleration();
         app.commandLine.appendSwitch('--headless');
     }
 
