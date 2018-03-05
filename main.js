@@ -39,7 +39,7 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
 
     if (!devMode) {
         app.disableHardwareAcceleration();
-        // app.commandLine.appendSwitch('--headless');
+        app.commandLine.appendSwitch('--headless');
     }
 
     app.on('ready', async () => {
