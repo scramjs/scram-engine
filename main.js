@@ -36,6 +36,12 @@ function launchApp(indexURL, filename, devMode, loadFromFile, serveDir) {
 
     app.setAppPath(path.resolve(__dirname, filename)); // this does the magic of allowing require to work properly from an HTML file loaded over HTTP
     app.commandLine.appendSwitch('disable-http-cache'); // there were some major issues with the cache not allowing changes to load properly on subsequent loads of the user's HTML app
+
+    if (!devMode) {
+        app.disableHardwareAcceleration();
+        // app.commandLine.appendSwitch('--headless');
+    }
+
     app.on('ready', async () => {
 
         if (!loadFromFile) {
