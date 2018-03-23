@@ -7,7 +7,7 @@ const program = require('commander');
 const {ipcMain} = require('electron');
 
 program
-    .version('0.7.4')
+    .version('0.7.5')
     .option('-e, --entry-file [entryFile]', 'The file to load into Electron')
     .option('-d, --serve-dir [serveDir]', 'The directory to serve local application files from')
     .option('-w, --window', 'Open an Electron window')
