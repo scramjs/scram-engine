@@ -6,7 +6,7 @@
   "dependencies": {
     "commander": "^2.15.1",
     "electron": "^2.0.0-beta.1",
-    "zwitterion": "^0.21.5"
+    "zwitterion": "^0.21.6"
   },
   "license": "MIT",
   "keywords": [
