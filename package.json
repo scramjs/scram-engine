@@ -2,19 +2,11 @@
   "name": "scram-engine",
   "version": "0.7.1",
   "description": "Use web components outside of the browser for desktop, server, and embedded applications.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lastmjs/scram-engine.git"
-  },
-  "bugs": {
-    "url": "https://github.com/lastmjs/scram-engine/issues"
-  },
-  "homepage": "https://github.com/lastmjs/scram-engine#readme",
   "devDependencies": {},
   "dependencies": {
-    "commander": "^2.14.1",
+    "commander": "^2.15.1",
     "electron": "^2.0.0-beta.1",
-    "zwitterion": "^0.20.5"
+    "zwitterion": "^0.21.4"
   },
   "license": "MIT",
   "keywords": [
