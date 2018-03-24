@@ -1,6 +1,6 @@
 {
   "name": "scram-engine",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "Use web components outside of the browser for desktop, server, and embedded applications.",
   "devDependencies": {},
   "dependencies": {
