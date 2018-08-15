@@ -11,5 +11,3 @@ window.document.documentElement.innerHTML = `
         ${innerHTML}
     </body>
 `;
-
-console.log(window.document.body.innerHTML);
