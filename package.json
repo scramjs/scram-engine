@@ -2,11 +2,13 @@
   "name": "scram-engine",
   "version": "0.7.6",
   "description": "Use web components outside of the browser for desktop, server, and embedded applications.",
+  "bin": {
+    "scram-engine": "./scram-engine.js"
+  },
   "devDependencies": {},
   "dependencies": {
-    "commander": "^2.15.1",
-    "electron": "^2.0.0-beta.1",
-    "zwitterion": "^0.22.0"
+    "basichtml": "^0.16.1",
+    "esm": "^3.0.76"
   },
   "license": "MIT",
   "keywords": [
